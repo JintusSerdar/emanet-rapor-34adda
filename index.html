@@ -115,6 +115,27 @@ footer {
   margin-top: 48px; padding-top: 14px; border-top: 1px solid var(--line);
   color: var(--muted); font-size: 0.85rem;
 }
+.sekmeler {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-top: 28px; border-bottom: 2px solid var(--line);
+}
+.sekmeler button {
+  font: inherit; padding: 8px 18px; cursor: pointer;
+  border: 1px solid var(--line); border-bottom: none;
+  border-radius: 8px 8px 0 0; background: var(--chip-bg); color: var(--ink);
+}
+.sekmeler button.aktif {
+  background: var(--surface); color: var(--accent);
+  font-weight: 600; border-color: var(--accent);
+}
+.sekmeler button:focus-visible { outline: 2px solid var(--accent); }
+.tab > section:first-child { margin-top: 24px; }
+.icerik { padding: 8px 14px; }
+.icerik h4 { margin: 10px 0 4px; }
+blockquote {
+  border-left: 3px solid var(--accent); margin: 8px 0;
+  padding: 4px 12px; color: var(--muted);
+}
 </style>
 <div class="sayfa">
 <header>
@@ -128,41 +149,14 @@ footer {
 </div>
 </header>
 
-<section>
-<h2>Kadro</h2>
-<div class="tablo-kap"><table class="kadro">
-<thead><tr><th>6. SINIF</th><th>6. SINIF</th><th>7. SINIF</th><th>7. SINIF</th><th>7. SINIF</th><th>8. SINIF</th></tr></thead>
-<tbody><tr class="mentor"><td>Emrullah</td><td>Hakan Kuzey</td><td>Ertuğrul Tan</td><td>Hakan Kaplan</td><td>Hayrettin Yıldırım</td><td>Yunus Abi</td></tr>
-<tr><td>Erkan A.</td><td>Levent B.</td><td>Numan P.</td><td>Mehmet U.</td><td>Yunus Ö.</td><td>Sadık K.</td></tr>
-<tr><td>Mete K.</td><td>Taha Ç.</td><td>Ahmet Ö.</td><td>Lokman K.</td><td>Murad P.</td><td>Hasan G.</td></tr>
-<tr><td>Taha İ.</td><td>Hayreddin</td><td>Selim K.</td><td>Murat Y.</td><td>İbrahim K.</td><td>Salih T.</td></tr>
-<tr><td>Metin Y.</td><td>Yusuf P.</td><td>Orhan A.</td><td>Fatih S.</td><td>Fatih O.</td><td>Mustafa K.</td></tr>
-<tr><td></td><td>Fatih A.</td><td>Hüseyin N.</td><td>Salahaddin S.</td><td>Akif G.</td><td></td></tr>
-<tr><td></td><td></td><td>Berat S.</td><td>Salih B.</td><td>Halil M.</td><td></td></tr>
-</tbody>
-</table></div>
-</section>
+<nav class="sekmeler">
+<button type="button" data-tab="yoklama" class="aktif">Yoklama</button>
+<button type="button" data-tab="ogrenciler">Öğrenciler</button>
+<button type="button" data-tab="haftalar">Haftalar</button>
+<button type="button" data-tab="sohbetler">Sohbetler</button>
+</nav>
 
-<section>
-<h2>Hafta Hafta</h2>
-<p class="not">Her haftanın müfredat konusu, grupların işlediği sohbet/aktivite ve katılımı.</p>
-<p class='not'>Yoklaması henüz alınmamış hafta: h35</p>
-<div class="hafta-kart">
-<h3>35. Hafta · 24–30 Ağustos 2026</h3>
-
-<div class="tablo-kap"><table class="ist">
-<thead><tr><th>Grup</th><th>Sohbet</th><th>Aktivite</th><th>Katılım</th></tr></thead>
-<tbody><tr><td>Emrullah Grubu</td><td>–</td><td>–</td><td>–</td></tr>
-<tr><td>Hakan Kuzey Grubu</td><td>–</td><td>–</td><td>–</td></tr>
-<tr><td>Ertuğrul Tan Grubu</td><td>–</td><td>–</td><td>–</td></tr>
-<tr><td>Hakan Kaplan Grubu</td><td>–</td><td>–</td><td>–</td></tr>
-<tr><td>Hayrettin Yıldırım Grubu</td><td>–</td><td>–</td><td>–</td></tr>
-<tr><td>Yunus Abi Grubu</td><td>–</td><td>–</td><td>–</td></tr>
-</tbody></table></div>
-</div>
-
-</section>
-
+<div class="tab" id="tab-yoklama">
 <section>
 <h2>Yoklama</h2>
 <p class="not"><span class="ok">1</span> geldi · <span class="no">0</span> gelmedi · – yoklama alınmadı. Başlıktaki İsim/Toplam'a tıkla: sıralar.</p>
@@ -259,6 +253,36 @@ footer {
 })();
 </script>
 
+<section>
+<h2>İstişare Katılımı</h2>
+<div class="tablo-kap"><table class="ist">
+<thead><tr><th>Mentor</th><th>24 Ağu</th><th>Toplam</th></tr></thead>
+<tbody><tr><td>Emrullah</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Hakan Kuzey</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Ertuğrul Tan</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Hakan Kaplan</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Hayrettin Yıldırım</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Yunus Abi</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+</tbody>
+</table></div>
+</section>
+</div>
+
+<div class="tab" id="tab-ogrenciler" hidden>
+<section>
+<h2>Kadro</h2>
+<div class="tablo-kap"><table class="kadro">
+<thead><tr><th>6. SINIF</th><th>6. SINIF</th><th>7. SINIF</th><th>7. SINIF</th><th>7. SINIF</th><th>8. SINIF</th></tr></thead>
+<tbody><tr class="mentor"><td>Emrullah</td><td>Hakan Kuzey</td><td>Ertuğrul Tan</td><td>Hakan Kaplan</td><td>Hayrettin Yıldırım</td><td>Yunus Abi</td></tr>
+<tr><td>Erkan A.</td><td>Levent B.</td><td>Numan P.</td><td>Mehmet U.</td><td>Yunus Ö.</td><td>Sadık K.</td></tr>
+<tr><td>Mete K.</td><td>Taha Ç.</td><td>Ahmet Ö.</td><td>Lokman K.</td><td>Murad P.</td><td>Hasan G.</td></tr>
+<tr><td>Taha İ.</td><td>Hayreddin</td><td>Selim K.</td><td>Murat Y.</td><td>İbrahim K.</td><td>Salih T.</td></tr>
+<tr><td>Metin Y.</td><td>Yusuf P.</td><td>Orhan A.</td><td>Fatih S.</td><td>Fatih O.</td><td>Mustafa K.</td></tr>
+<tr><td></td><td>Fatih A.</td><td>Hüseyin N.</td><td>Salahaddin S.</td><td>Akif G.</td><td></td></tr>
+<tr><td></td><td></td><td>Berat S.</td><td>Salih B.</td><td>Halil M.</td><td></td></tr>
+</tbody>
+</table></div>
+</section>
 
 <section>
 <h2>Öğrenci Geçmişi</h2>
@@ -469,20 +493,50 @@ footer {
 </div>
 
 </section>
+</div>
 
+<div class="tab" id="tab-haftalar" hidden>
 <section>
-<h2>İstişare Katılımı</h2>
+<h2>Hafta Hafta</h2>
+<p class="not">Her haftanın müfredat konusu, grupların işlediği sohbet/aktivite ve katılımı.</p>
+<p class='not'>Yoklaması henüz alınmamış hafta: h35</p>
+<div class="hafta-kart">
+<h3>35. Hafta · 24–30 Ağustos 2026</h3>
+
 <div class="tablo-kap"><table class="ist">
-<thead><tr><th>Mentor</th><th>h35</th><th>Toplam</th></tr></thead>
-<tbody><tr><td>Emrullah</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
-<tr><td>Hakan Kuzey</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
-<tr><td>Ertuğrul Tan</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
-<tr><td>Hakan Kaplan</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
-<tr><td>Hayrettin Yıldırım</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
-<tr><td>Yunus Abi</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
-</tbody>
-</table></div>
+<thead><tr><th>Grup</th><th>Sohbet</th><th>Aktivite</th><th>Katılım</th></tr></thead>
+<tbody><tr><td>Emrullah Grubu</td><td>–</td><td>–</td><td>–</td></tr>
+<tr><td>Hakan Kuzey Grubu</td><td>–</td><td>–</td><td>–</td></tr>
+<tr><td>Ertuğrul Tan Grubu</td><td>–</td><td>–</td><td>–</td></tr>
+<tr><td>Hakan Kaplan Grubu</td><td>–</td><td>–</td><td>–</td></tr>
+<tr><td>Hayrettin Yıldırım Grubu</td><td>–</td><td>–</td><td>–</td></tr>
+<tr><td>Yunus Abi Grubu</td><td>–</td><td>–</td><td>–</td></tr>
+</tbody></table></div>
+</div>
+
 </section>
+</div>
+
+<div class="tab" id="tab-sohbetler" hidden>
+<section>
+<h2>Sohbetler ve Kaynaklar</h2>
+<p class="not">Haftalık sohbet içerikleri, video ve kaynak linkleri.</p>
+<p class="not">Henüz sohbet eklenmedi. Sohbetler vault'a işlendikçe konu, içerik ve video/kaynak linkleriyle burada listelenir.</p>
+</section>
+</div>
 
 <footer>Bu rapor Emanet vault'undan üretilir. İletişim bilgileri, aile kayıtları, mentor gözlem raporları ve kişisel notlar bilerek yer almaz. Öğrenci soyadları kısaltılmıştır.</footer>
 </div>
+<script>
+(function () {
+  var btns = document.querySelectorAll('.sekmeler button');
+  function ac(ad) {
+    btns.forEach(function (b) { b.classList.toggle('aktif', b.dataset.tab === ad); });
+    document.querySelectorAll('.tab').forEach(function (t) { t.hidden = (t.id !== 'tab-' + ad); });
+    if (history.replaceState) history.replaceState(null, '', '#' + ad);
+  }
+  btns.forEach(function (b) { b.addEventListener('click', function () { ac(b.dataset.tab); }); });
+  var h = location.hash.replace('#', '');
+  if (h && document.getElementById('tab-' + h)) ac(h);
+})();
+</script>
