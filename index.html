@@ -1,0 +1,199 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Emanet Raporu</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Serif:wght@600&display=swap">
+<style>
+:root {
+  --bg: #faf9f5; --surface: #ffffff; --ink: #26251f; --muted: #6f6c62;
+  --line: #e3e0d6; --accent: #3b66b0;
+  --head-bg: #4a86e8; --head-ink: #ffffff;
+  --mentor-bg: #ffe86b; --mentor-ink: #2a2510;
+  --ok: #2e7d4f; --no: #b3423a; --chip-bg: #eeece4;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1f1e1b; --surface: #282723; --ink: #e8e5dc; --muted: #a39f92;
+    --line: #3b3a34; --accent: #8db0e8;
+    --head-bg: #2f4f8f; --head-ink: #eef2fb;
+    --mentor-bg: #4a4020; --mentor-ink: #f0e6b0;
+    --ok: #7cc99a; --no: #e09088; --chip-bg: #33322c;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1f1e1b; --surface: #282723; --ink: #e8e5dc; --muted: #a39f92;
+  --line: #3b3a34; --accent: #8db0e8;
+  --head-bg: #2f4f8f; --head-ink: #eef2fb;
+  --mentor-bg: #4a4020; --mentor-ink: #f0e6b0;
+  --ok: #7cc99a; --no: #e09088; --chip-bg: #33322c;
+}
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  margin: 0; line-height: 1.55;
+}
+.sayfa { max-width: 1080px; margin: 0 auto; padding: 40px 20px 64px; }
+header h1 {
+  font-family: "IBM Plex Serif", Georgia, serif;
+  font-size: 2rem; margin: 0 0 4px; text-wrap: balance;
+}
+header .tanim { color: var(--muted); margin: 0 0 14px; }
+.çipler { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.çip {
+  background: var(--chip-bg); border: 1px solid var(--line);
+  border-radius: 999px; padding: 3px 12px; font-size: 0.85rem;
+}
+section { margin-top: 40px; }
+section h2 {
+  font-size: 1.15rem; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--accent); border-bottom: 2px solid var(--line);
+  padding-bottom: 6px; margin: 0 0 16px;
+}
+.tablo-kap { overflow-x: auto; }
+table {
+  border-collapse: collapse; width: 100%;
+  font-variant-numeric: tabular-nums; font-size: 0.95rem;
+  background: var(--surface);
+}
+th, td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; }
+table.kadro thead th { background: var(--head-bg); color: var(--head-ink); }
+table.kadro tbody tr.mentor td {
+  background: var(--mentor-bg); color: var(--mentor-ink); font-weight: 600;
+}
+table.yok th, table.ist th { background: var(--chip-bg); }
+table.yok td:not(:first-child), table.yok th:not(:first-child),
+table.ist td:not(:first-child), table.ist th:not(:first-child) { text-align: center; }
+tr.toplam td { border-top: 2px solid var(--line); font-weight: 600; }
+.sum { font-weight: 600; }
+.ok { color: var(--ok); font-weight: 700; }
+.no { color: var(--no); font-weight: 700; }
+.na { color: var(--muted); }
+.kart { margin-bottom: 24px; }
+.kart h3 { margin: 0 0 8px; font-size: 1rem; }
+.kart .alt { color: var(--muted); font-weight: 400; font-size: 0.88rem; }
+.kartlar { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px 28px; }
+.not { color: var(--muted); font-size: 0.9rem; }
+footer {
+  margin-top: 48px; padding-top: 14px; border-top: 1px solid var(--line);
+  color: var(--muted); font-size: 0.85rem;
+}
+</style>
+<div class="sayfa">
+<header>
+<h1>Emanet Raporu</h1>
+<p class="tanim">Bay Area ortaokul mentorluk çalışması · haftalık durum</p>
+<div class="çipler">
+<span class="çip">Güncelleme: 2026-08-31</span>
+<span class="çip">6 grup</span>
+<span class="çip">6 mentor</span>
+<span class="çip">31 öğrenci</span>
+</div>
+</header>
+
+<section>
+<h2>Kadro</h2>
+<div class="tablo-kap"><table class="kadro">
+<thead><tr><th>6. SINIF</th><th>6. SINIF</th><th>7. SINIF</th><th>7. SINIF</th><th>7. SINIF</th><th>8. SINIF</th></tr></thead>
+<tbody><tr class="mentor"><td>Emrullah</td><td>Hakan Kuzey</td><td>Ertuğrul Tan</td><td>Hakan Kaplan</td><td>Hayrettin Yıldırım</td><td>Yunus Abi</td></tr>
+<tr><td>Erkan A.</td><td>Levent B.</td><td>Numan P.</td><td>Mehmet U.</td><td>Yunus Ö.</td><td>Sadık K.</td></tr>
+<tr><td>Mete K.</td><td>Taha Ç.</td><td>Ahmet Ö.</td><td>Lokman K.</td><td>Murad P.</td><td>Hasan G.</td></tr>
+<tr><td>Taha İ.</td><td>Hayreddin</td><td>Selim K.</td><td>Murat Y.</td><td>İbrahim K.</td><td>Salih T.</td></tr>
+<tr><td>Metin Y.</td><td>Yusuf P.</td><td>Orhan A.</td><td>Fatih S.</td><td>Fatih O.</td><td>Mustafa K.</td></tr>
+<tr><td></td><td>Fatih A.</td><td>Hüseyin N.</td><td>Salahaddin S.</td><td>Akif G.</td><td></td></tr>
+<tr><td></td><td></td><td>Berat S.</td><td>Salih B.</td><td>Halil M.</td><td></td></tr>
+</tbody>
+</table></div>
+</section>
+
+<section>
+<h2>Program Yoklaması</h2>
+<p class="not"><span class="ok">✓</span> geldi · <span class="no">✗</span> gelmedi · <span class="na">–</span> yoklama alınmadı</p>
+<p class='not'>Yoklaması henüz alınmamış hafta: h35</p>
+<div class="kartlar">
+<div class="kart">
+<h3>Emrullah Grubu <span class="alt">6. sınıf · Emrullah</span></h3>
+<div class="tablo-kap"><table class="yok">
+<thead><tr><th>Öğrenci</th><th>h35</th><th>Toplam</th></tr></thead>
+<tbody><tr><td>Erkan A.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Mete K.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Taha İ.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Metin Y.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr class="toplam"><td>Toplam</td><td>–</td><td></td></tr></tbody>
+</table></div></div>
+<div class="kart">
+<h3>Hakan Kuzey Grubu <span class="alt">6. sınıf · Hakan Kuzey</span></h3>
+<div class="tablo-kap"><table class="yok">
+<thead><tr><th>Öğrenci</th><th>h35</th><th>Toplam</th></tr></thead>
+<tbody><tr><td>Levent B.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Taha Ç.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Hayreddin</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Yusuf P.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Fatih A.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr class="toplam"><td>Toplam</td><td>–</td><td></td></tr></tbody>
+</table></div></div>
+<div class="kart">
+<h3>Ertuğrul Tan Grubu <span class="alt">7. sınıf · Ertuğrul Tan</span></h3>
+<div class="tablo-kap"><table class="yok">
+<thead><tr><th>Öğrenci</th><th>h35</th><th>Toplam</th></tr></thead>
+<tbody><tr><td>Numan P.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Ahmet Ö.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Selim K.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Orhan A.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Hüseyin N.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Berat S.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr class="toplam"><td>Toplam</td><td>–</td><td></td></tr></tbody>
+</table></div></div>
+<div class="kart">
+<h3>Hakan Kaplan Grubu <span class="alt">7. sınıf · Hakan Kaplan</span></h3>
+<div class="tablo-kap"><table class="yok">
+<thead><tr><th>Öğrenci</th><th>h35</th><th>Toplam</th></tr></thead>
+<tbody><tr><td>Mehmet U.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Lokman K.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Murat Y.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Fatih S.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Salahaddin S.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Salih B.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr class="toplam"><td>Toplam</td><td>–</td><td></td></tr></tbody>
+</table></div></div>
+<div class="kart">
+<h3>Hayrettin Yıldırım Grubu <span class="alt">7. sınıf · Hayrettin Yıldırım</span></h3>
+<div class="tablo-kap"><table class="yok">
+<thead><tr><th>Öğrenci</th><th>h35</th><th>Toplam</th></tr></thead>
+<tbody><tr><td>Yunus Ö.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Murad P.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>İbrahim K.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Fatih O.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Akif G.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Halil M.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr class="toplam"><td>Toplam</td><td>–</td><td></td></tr></tbody>
+</table></div></div>
+<div class="kart">
+<h3>Yunus Abi Grubu <span class="alt">8. sınıf · Yunus Abi</span></h3>
+<div class="tablo-kap"><table class="yok">
+<thead><tr><th>Öğrenci</th><th>h35</th><th>Toplam</th></tr></thead>
+<tbody><tr><td>Sadık K.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Hasan G.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Salih T.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Mustafa K.</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr class="toplam"><td>Toplam</td><td>–</td><td></td></tr></tbody>
+</table></div></div>
+
+</div>
+</section>
+
+<section>
+<h2>İstişare Katılımı</h2>
+<div class="tablo-kap"><table class="ist">
+<thead><tr><th>Mentor</th><th>h35</th><th>Toplam</th></tr></thead>
+<tbody><tr><td>Emrullah</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Hakan Kuzey</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Ertuğrul Tan</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Hakan Kaplan</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Hayrettin Yıldırım</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+<tr><td>Yunus Abi</td><td><span class="na">–</span></td><td class='sum'>–</td></tr>
+</tbody>
+</table></div>
+</section>
+
+<footer>Bu rapor Emanet vault'undan üretilir. İletişim bilgileri, aile kayıtları ve kişisel notlar bilerek yer almaz. Öğrenci soyadları kısaltılmıştır.</footer>
+</div>
