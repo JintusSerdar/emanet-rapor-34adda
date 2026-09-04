@@ -469,6 +469,15 @@
     .slayt.aktif { transition-delay: 0s; }
     .ilerleme-dolu { transition: none; }
   }
+
+  /* Kısa ekranlar (dizüstü) — yoğun slaytlar sığsın */
+  @media (max-height: 780px) {
+    .icerik { padding: clamp(28px, 4vh, 56px) clamp(36px, 5vw, 90px); }
+    .gundem-baslik { font-size: clamp(26px, 3.4vh, 40px); }
+    .gruplar-tablo td { padding-block: 8px; font-size: clamp(15px, 2.1vh, 20px); }
+    .maddeler li { margin-block: 8px; }
+    .program li { margin-block: 8px; }
+  }
 </style>
 </head>
 <body>
