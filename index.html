@@ -29,6 +29,7 @@
   --head-bg: #2f4f8f; --head-ink: #eef2fb;
   --mentor-bg: #4a4020; --mentor-ink: #f0e6b0;
   --ok: #7cc99a; --no: #e09088; --chip-bg: #33322c;
+  --cok-bg: #2e4a3a; --cok-ink: #cfeeda; --cno-bg: #5a2f2c; --cno-ink: #f3cfc9;
 }
 body {
   background: var(--bg); color: var(--ink);
@@ -69,6 +70,25 @@ table.ist td:not(:first-child), table.ist th:not(:first-child) { text-align: cen
 tr.toplam td { border-top: 2px solid var(--line); font-weight: 600; }
 table.bilgi td { text-align: left !important; white-space: normal; }
 table.bilgi td:first-child { color: var(--muted); width: 11em; }
+.cipler { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+.cip-o {
+  font: inherit; padding: 8px 14px; border-radius: 999px;
+  border: 1px solid var(--line); cursor: pointer;
+}
+.cip-o.g1 { background: var(--cok-bg); color: var(--cok-ink); }
+.cip-o.g0 { background: var(--cno-bg); color: var(--cno-ink); }
+.cip-o:focus-visible { outline: 2px solid var(--accent); }
+.giris-alt { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.giris-alt input {
+  font: inherit; padding: 7px 10px; border: 1px solid var(--line);
+  border-radius: 6px; background: var(--surface); color: var(--ink); width: 14em;
+}
+button.kaydet {
+  font: inherit; font-weight: 600; padding: 8px 20px; cursor: pointer;
+  border: 1px solid var(--accent); border-radius: 6px;
+  background: var(--accent); color: var(--head-ink);
+}
+button.kaydet:disabled { opacity: 0.6; }
 .filtreler {
   display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 12px;
 }
@@ -148,7 +168,7 @@ blockquote {
 <h1>Emanet</h1>
 <p class="tanim">Bay Area ortaokul çalışması · 2026–2027 dönemi</p>
 <div class="çipler">
-<span class="çip">Güncelleme: 2026-09-01</span>
+<span class="çip">Güncelleme: 2026-09-03</span>
 <span class="çip">6 grup</span>
 <span class="çip">6 mentor</span>
 <span class="çip">32 öğrenci</span>
@@ -163,6 +183,7 @@ blockquote {
 </nav>
 
 <div class="tab" id="tab-yoklama">
+
 <section>
 <h2>Yoklama</h2>
 <p class="not"><span class="ok">1</span> geldi · <span class="no">0</span> gelmedi · – yoklama alınmadı. Başlıktaki İsim/Toplam'a tıkla: sıralar.</p>
@@ -548,7 +569,7 @@ blockquote {
 <p class='not'>Yoklaması henüz alınmamış hafta: h36</p>
 <div class="hafta-kart">
 <h3>1. Hafta · 31 Ağustos – 6 Eylül 2026</h3>
-
+<p class="not">Müfredat konusu: Buraya boşuna gelmedik (açılış) · Mentorlara sohbet: Buraya Boşuna Gelmedik — açılış sohbeti (12-15 dk), ardından program-esaslari gündemi.</p>
 <div class="tablo-kap"><table class="ist">
 <thead><tr><th>Grup</th><th>Sohbet</th><th>Aktivite</th><th>Katılım</th></tr></thead>
 <tbody><tr><td>Emrullah Grubu</td><td>–</td><td>–</td><td>–</td></tr>
@@ -567,7 +588,43 @@ blockquote {
 <section>
 <h2>Sohbetler ve Kaynaklar</h2>
 <p class="not">Haftalık sohbet içerikleri, video ve kaynak linkleri.</p>
-<p class="not">Henüz sohbet eklenmedi. Sohbetler vault'a işlendikçe konu, içerik ve video/kaynak linkleriyle burada listelenir.</p>
+<div class="hafta-kart">
+<h3>Buraya Boşuna Gelmedik <span class="alt">sohbet · Kaynak: Teslimiyet Yolunda · 23-hp-1, 23-hp-2, 23-hp-6, 23-hp-8, 23-hp-19, 23-hp-27, 23-teb-1</span></h3>
+<p>Amerika'ya gelişimiz kaderledir; evrendeki her şey görevini yaparken bize vaat edilen halifelik görevinin stajı şimdi, burada başlıyor. Süre: 12–15 dakika. Dinleyici: mentorlar (açılış istişaresi).</p>
+<details class="ogr"><summary>İçeriği aç</summary><div class="icerik"><h4>Akış</h4><h4>1. Soru ile aç (1 dk)</h4>
+<p>Amerika'dayız. Buraya sıradan bir hayat yaşamaya mı geldik — okul, iş, ev, sıradan bir Müslümanlık? Yoksa bir sebeple mi buradayız? Cevabı verme, beklet.</p>
+<h4>2. Boşuna değil (2 dk)</h4>
+<blockquote>"Semayı, arzı ve ikisi arasındaki şeyleri boşuna yaratmadık." (Sâd 27)</blockquote>
+<blockquote>"Biz, semaları, arzı ve ikisi arasında bulunanları bir 'oyun ve oyalanma konusu' olsun diye yaratmadık." (Duhân 38)</blockquote>
+<p>Hakikat Planı: "Her şey bir kaderle yaratılmış" ve "Bütün işler kararlaştırılmıştır."</p>
+<h4>3. Bilmedikleri kavram: Afak (3 dk)</h4>
+<blockquote>"Her haberin kararlaştırılmış, gerçekleşeceği bir zaman/mekân vardır." (En'âm 67)</blockquote>
+<blockquote>"Hazinesi bizim yanımızda olmayan hiçbir şey yoktur. Bilinen bir kaderi (planı) olmaksızın onu indirmeyiz." (Hicr 21)</blockquote>
+<p>Kavramı öğret — <strong>Afak: "ufuklar, uzak ülkeler, dünyanın dört bucağı."</strong> Tebliğler: "Ayetlerin tevillerinin uzak olan gelecekteki ülkelerde, dünyanın dört bucağında ve de varlıkların ufukları olan bilinçlerinde gösterileceği bildirilmiştir."</p>
+<blockquote>"Biz ayetlerimizi hem afakta hem kendi nefslerinde onlara göstereceğiz; öyle ki, şüphesiz onun hak olduğu kendilerine açıkça belli olsun." (Fussilet 53)</blockquote>
+<p>O uzak ülke dediği yerde oturuyoruz. Zaman ve mekân kararlaştırılmış; buraya gelişimiz kaderle.</p>
+<h4>4. Evren hizmette — ya biz? (3 dk)</h4>
+<p>Hakikat Planı'nın saat metaforu: "Her şey, muazzam bir tertip içerisinde saat gibi işlemektedir. Saati yaratan O, her şeyi bir plana ve ölçüye göre belirlemiştir. Saati oluşturan parçalar, saatin farkında olsa da olmasa da saate hizmet etmektedirler. Zamanı gelen her parça, plana dâhil olarak görevini en iyi şekilde sürdürmektedir."</p>
+<blockquote>"O, arzda olanların hepsini sizin için yarattı." (Bakara 29)</blockquote>
+<p>Hac 18'deki ince ayrıntı:</p>
+<blockquote>"Görmedin mi ki, gerçekten, semalarda ve arzda olanlar, güneş, ay, yıldızlar, dağlar, ağaçlar, hayvanlar ve insanlardan birçoğu Allah'a secde etmektedirler." (Hac 18)</blockquote>
+<p>Hepsi değil — <strong>birçoğu.</strong> Evrende görevi tartışmalı tek varlık: insan. Parçalar görevini yapıyorsa bizim görevimiz ne?</p>
+<h4>5. Vaat: halifelik — doğru yerinden (3 dk)</h4>
+<p>Öğretinin sınırı: "Yaşanılan zamandaki insan halife değildir; bu göreve ulaşabilmek için imtihandadır. Başarılı olup seçilirse görev verilir." Vaat edilen bir makam değil, görev: "Şu anda arındırılma planında yer alan varlıklara vaat edilen şey, arz planı gibi boyutların, yönetici kadrosu olan halifelik görevidir."</p>
+<blockquote>"Allah, sizden iman edenlere ve salih amel işleyenlere, kendilerinden öncekileri arzda halife kıldığı gibi mutlaka onları da halife kılacağını ve onlara, onlar için razı olduğu dinlerini mutlaka sağlamlaştıracağını ve korkularından sonra mutlaka güvenliğe çevireceğini vaat etti." (Nûr 55)</blockquote>
+<blockquote>"Ey Davut! Muhakkak ki biz, seni arzın halifesi kıldık. Bunun için insanlar arasında hak ile hükmet! Ve hevaya tabi olma." (Sâd 26)</blockquote>
+<p>Ve emanet pasajı: "İlk emanet, Adem (as) yaratıldığı süreçte onun fıtratına kodlanmış halifelik programıdır. Fakat o neslin başarısızlığı sebebiyle emanet insan tarafından tutulamamıştır. Böylece onu taşıyacak olanlar, emanetin kullanımı yerine tekrar o emanete ulaşabilmek için Rahman tarafından arz planlarına indirilmişlerdir."</p>
+<p><strong>Buraya o emanete yeniden ulaşmak için indirildik. Bu yüzden bu çalışmanın adı Emanet</strong> — elimizdeki çocuklar da bize emanet.</p>
+<h4>6. Staj ve tohum (2-3 dk)</h4>
+<p>"Şimdi dikkat edin: demek ki biz bir <strong>halifeliğin stajındayız</strong>. Ve bu güzel görevin stajı ileride bir gün değil, <strong>şu andan başlıyor.</strong> Bu hafta gideceğiniz ev, karşınıza oturacak dört çocuk, hazırlayacağınız sohbet — staj defterinin ilk sayfası bunlar."</p>
+<blockquote>"Mallarını Allah yolunda infak edenlerin örneği yedi başak bitiren, her bir başakta yüz tane bulunan bir tek tanenin örneği gibidir. Allah, dilediğine kat kat arttırır." (Bakara 261)</blockquote>
+<p>Bir taneden yedi yüz tane. Ama çoğalma sayı saymakla olmuyor; kitap ne diyor: "Bitkinin yetişmesi, ürün ve tohum verecek hâle gelmesidir." Önce biz yetişeceğiz ki tohum verebilelim. Elimizdeki beş çocuk birer tohum; biz de tohumuz.</p>
+<h4>7. Kapanış duası → program esasları</h4>
+<p>"Başa dönün — afak neydi? Uzak ülkeler, dünyanın dört bucağı. Ayetler oralarda gösterilecek denmişti; o uzak ülke burası, biz buradayız. <strong>Bu tohumları yetiştirip, ürününü alıp, içinde bulunduğumuz bu afaklarda — bu uzak ülkelerde — Allah'ın nurunu yaymak dileğiyle.</strong> Rabbim stajımızı hakkıyla tamamlamayı nasip etsin."</p>
+<p>Buradan program-esaslari gündemine geçilir.</p><h4>Ayetler ve kaynaklar</h4><p>Sâd 27 · Duhân 38 · En'âm 67 · Hicr 21 · Fussilet 53 · Bakara 29 · Hac 18 · Nûr 55 · Sâd 26 · Bakara 261 — mealler EE'den birebir.</p>
+<p>Öğreti alıntıları: Hakikat Planı Bölüm 1, 2, 6, 8, 19, 27 · Tebliğler Bölüm 1 (Afak).</p></div></details><p class="not">Verildiği yerler: 1. Hafta · 31 Ağustos – 6 Eylül 2026 — mentorlara, açılış istişaresi. ·  · --- · Kaynak: Teslimiyet Yolunda · 23-hp-1, 23-hp-2, 23-hp-6, 23-hp-8, 23-hp-19, 23-hp-27, 23-teb-1</p>
+</div>
+
 </section>
 </div>
 
