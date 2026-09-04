@@ -1,0 +1,1088 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emanet · 2026–2027 Açılış</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap">
+<style>
+  :root {
+    --zemin: #0d1420;
+    --zemin-bolum: #111a29;
+    --metin: #f2ede2;
+    --soluk: #94a2b8;
+    --altin: #d9a94b;
+    --altin-yari: rgba(217, 169, 75, .55);
+    --altin-cizgi: rgba(217, 169, 75, .35);
+    --cizgi: rgba(148, 162, 184, .22);
+    --serif: 'Lora', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    background: var(--zemin);
+  }
+
+  body {
+    color: var(--metin);
+    font-family: var(--sans);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--altin-yari); color: #0d1420; }
+
+  .sahne {
+    position: fixed;
+    inset: 0;
+    background: var(--zemin);
+    outline: none;
+  }
+  .sahne:focus-visible {
+    outline: 2px solid var(--altin);
+    outline-offset: -6px;
+  }
+
+  /* ---------- Slayt iskeleti ---------- */
+  .slayt {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    background: var(--zemin);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(16px);
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity .26s ease, transform .26s ease, visibility 0s linear .26s;
+    overflow: hidden;
+  }
+  .slayt.aktif {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+    z-index: 2;
+    transition-delay: 0s;
+  }
+
+  .icerik {
+    position: relative;
+    z-index: 3;
+    width: min(100%, 1220px);
+    margin-inline: auto;
+    padding: clamp(48px, 8vh, 96px) clamp(44px, 6.5vw, 120px);
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+
+  /* ---------- Ufuk ışıması (afak) ---------- */
+  .slayt.ayet::after,
+  .slayt.dua::after,
+  .slayt.kapak::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 42vh;
+    pointer-events: none;
+    background: radial-gradient(115% 95% at 50% 120%,
+      rgba(217, 169, 75, .12) 0%,
+      rgba(217, 169, 75, .045) 40%,
+      rgba(217, 169, 75, 0) 68%);
+  }
+  .slayt.kapak::after { opacity: .7; }
+  .slayt.dua::after {
+    height: 58vh;
+    background: radial-gradient(115% 100% at 50% 118%,
+      rgba(217, 169, 75, .26) 0%,
+      rgba(217, 169, 75, .10) 38%,
+      rgba(217, 169, 75, 0) 70%);
+  }
+  .slayt.dua::before {
+    content: "";
+    position: absolute;
+    left: 12%; right: 12%; bottom: 11vh;
+    height: 1px;
+    pointer-events: none;
+    background: linear-gradient(90deg,
+      rgba(217, 169, 75, 0) 0%,
+      rgba(217, 169, 75, .5) 50%,
+      rgba(217, 169, 75, 0) 100%);
+  }
+
+  /* ---------- Rozetler / etiketler ---------- */
+  .rozet {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: clamp(15px, 1.15vw, 18px);
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--altin);
+    margin-bottom: clamp(30px, 5vh, 52px);
+  }
+  .rozet::before {
+    content: "";
+    width: 38px;
+    height: 1px;
+    background: var(--altin-yari);
+    flex: none;
+  }
+
+  .etiket {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(16px, 1.25vw, 20px);
+    letter-spacing: .12em;
+    color: var(--soluk);
+    margin-bottom: clamp(22px, 3.5vh, 36px);
+  }
+  .etiket::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border: 1px solid var(--altin-yari);
+    transform: rotate(45deg);
+    flex: none;
+  }
+
+  /* ---------- Ayet dili ---------- */
+  .ayet-metin {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(30px, 3.5vw, 52px);
+    line-height: 1.45;
+    color: var(--metin);
+    max-width: 24em;
+  }
+  .ayet-metin.uzun {
+    font-size: clamp(26px, 2.7vw, 40px);
+    line-height: 1.55;
+  }
+  .kaynak {
+    margin-top: clamp(28px, 4.5vh, 46px);
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(21px, 1.9vw, 29px);
+    color: var(--altin);
+  }
+  .ayet-not {
+    margin-top: clamp(18px, 3vh, 30px);
+    font-size: clamp(19px, 1.7vw, 26px);
+    color: var(--soluk);
+  }
+  .isaret { color: var(--altin); }
+
+  /* ---------- Kitap dili ---------- */
+  .kitap-metin {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(25px, 2.55vw, 39px);
+    line-height: 1.58;
+    color: var(--metin);
+    max-width: 27em;
+    padding-left: clamp(22px, 2.4vw, 36px);
+    border-left: 2px solid var(--altin-cizgi);
+  }
+  .kitap-metin .baglac { color: var(--soluk); }
+  .kitap-metin.kucuk {
+    font-size: clamp(21px, 2.1vw, 32px);
+  }
+  .kat + .kat { margin-top: clamp(38px, 7vh, 68px); }
+
+  .vurgu-satiri {
+    margin-top: clamp(34px, 5.5vh, 56px);
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(28px, 3vw, 44px);
+    color: var(--altin);
+  }
+
+  /* ---------- Kapak & bölüm kapakları ---------- */
+  .slayt.kapak .ust-cizgi {
+    width: 72px;
+    height: 2px;
+    background: var(--altin);
+    margin-bottom: clamp(34px, 6vh, 60px);
+  }
+  .kapak-baslik {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(84px, 13vw, 190px);
+    line-height: 1.02;
+    letter-spacing: .01em;
+    color: var(--metin);
+  }
+  .kapak-alt {
+    margin-top: clamp(26px, 4.5vh, 44px);
+    font-size: clamp(26px, 2.4vw, 38px);
+    font-weight: 400;
+    color: var(--metin);
+  }
+  .kapak-kucuk {
+    margin-top: clamp(14px, 2vh, 22px);
+    font-size: clamp(18px, 1.6vw, 25px);
+    font-weight: 400;
+    letter-spacing: .06em;
+    color: var(--soluk);
+  }
+
+  .slayt.bolum {
+    background:
+      radial-gradient(85% 70% at 12% 88%, rgba(217, 169, 75, .09) 0%, rgba(217, 169, 75, 0) 60%),
+      linear-gradient(180deg, var(--zemin-bolum) 0%, var(--zemin) 100%);
+  }
+  .bolum-kicker {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: clamp(15px, 1.2vw, 19px);
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--altin);
+    margin-bottom: clamp(28px, 5vh, 48px);
+  }
+  .bolum-baslik {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(56px, 8vw, 128px);
+    line-height: 1.08;
+    color: var(--metin);
+    max-width: 12em;
+  }
+  .bolum-alt {
+    margin-top: clamp(20px, 3.5vh, 34px);
+    font-size: clamp(20px, 1.8vw, 28px);
+    letter-spacing: .05em;
+    color: var(--soluk);
+  }
+
+  /* ---------- Soru & vurgu ---------- */
+  .soru-metin {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(40px, 5vw, 76px);
+    line-height: 1.22;
+    color: var(--metin);
+    max-width: 16em;
+  }
+  .soru-alt {
+    margin-top: clamp(26px, 4.5vh, 44px);
+    font-size: clamp(22px, 2vw, 32px);
+    color: var(--soluk);
+    max-width: 30em;
+  }
+
+  .vurgu-metin {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(44px, 5.6vw, 86px);
+    line-height: 1.16;
+    color: var(--metin);
+    max-width: 14em;
+  }
+  .vurgu-alt {
+    margin-top: clamp(24px, 4vh, 40px);
+    font-size: clamp(22px, 2vw, 32px);
+    color: var(--soluk);
+    max-width: 26em;
+  }
+
+  /* ---------- Kavram (AFAK) ---------- */
+  .kavram-kelime {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(76px, 11vw, 164px);
+    line-height: 1;
+    letter-spacing: .1em;
+    color: var(--metin);
+  }
+  .kavram-tanim {
+    margin-top: clamp(16px, 2.5vh, 26px);
+    font-family: var(--serif);
+    font-size: clamp(24px, 2.3vw, 36px);
+    color: var(--altin);
+  }
+  .kavram-govde {
+    margin-top: clamp(38px, 6.5vh, 64px);
+  }
+
+  /* ---------- Dua & son ---------- */
+  .dua-metin {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(32px, 3.7vw, 56px);
+    line-height: 1.5;
+    color: var(--metin);
+    max-width: 22em;
+  }
+  .son-baslik {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(56px, 7.5vw, 118px);
+    line-height: 1.1;
+    color: var(--metin);
+  }
+  .son-alt {
+    margin-top: clamp(20px, 3.5vh, 34px);
+    font-size: clamp(19px, 1.7vw, 26px);
+    letter-spacing: .1em;
+    color: var(--soluk);
+  }
+
+  /* ---------- Gündem slaytları ---------- */
+  .gundem-baslik {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(40px, 4.4vw, 66px);
+    line-height: 1.15;
+    color: var(--metin);
+    margin-bottom: clamp(36px, 6vh, 60px);
+  }
+  .gundem-baslik::after {
+    content: "";
+    display: block;
+    width: 58px;
+    height: 2px;
+    background: var(--altin);
+    margin-top: clamp(18px, 3vh, 28px);
+  }
+
+  .maddeler {
+    list-style: none;
+    display: grid;
+    gap: clamp(22px, 3.6vh, 34px);
+    max-width: 30em;
+    font-size: clamp(25px, 2.35vw, 36px);
+    line-height: 1.45;
+    color: var(--metin);
+  }
+  .maddeler li {
+    position: relative;
+    padding-left: 1.5em;
+  }
+  .maddeler li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .68em;
+    width: .72em;
+    height: 2px;
+    background: var(--altin-yari);
+  }
+  .maddeler .ic { color: var(--altin); }
+
+  .alt-not {
+    margin-top: clamp(32px, 5.5vh, 52px);
+    font-size: clamp(19px, 1.7vw, 26px);
+    color: var(--soluk);
+    max-width: 34em;
+  }
+
+  .on-cumle {
+    font-size: clamp(25px, 2.35vw, 36px);
+    color: var(--metin);
+    margin-bottom: clamp(24px, 4vh, 38px);
+  }
+
+  .program {
+    list-style: none;
+    display: grid;
+    gap: clamp(20px, 3.4vh, 32px);
+    max-width: 28em;
+    font-size: clamp(25px, 2.35vw, 36px);
+    line-height: 1.4;
+  }
+  .program li {
+    display: grid;
+    grid-template-columns: 1.6em 1fr;
+    gap: .55em;
+    align-items: baseline;
+  }
+  .program .no {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.12em;
+    color: var(--altin);
+  }
+  .program .ayrinti { color: var(--soluk); font-size: .82em; }
+
+  /* ---------- Gruplar tablosu ---------- */
+  .gruplar-tablo {
+    width: 100%;
+    max-width: 1040px;
+    border-collapse: collapse;
+    font-size: clamp(23px, 2.1vw, 32px);
+  }
+  .gruplar-tablo td {
+    padding: clamp(16px, 2.6vh, 24px) 0;
+    border-bottom: 1px solid var(--cizgi);
+    vertical-align: baseline;
+  }
+  .gruplar-tablo tr:last-child td { border-bottom: none; }
+  .gruplar-tablo .ad { font-weight: 500; color: var(--metin); padding-right: 1.2em; white-space: nowrap; }
+  .gruplar-tablo .ev { color: var(--altin); font-family: var(--serif); padding-right: 1.2em; white-space: nowrap; }
+  .gruplar-tablo .zaman { color: var(--soluk); text-align: right; white-space: nowrap; }
+
+  /* ---------- İlerleme & sayaç ---------- */
+  .ilerleme {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    height: 3px;
+    background: rgba(148, 162, 184, .16);
+    z-index: 20;
+  }
+  .ilerleme-dolu {
+    height: 100%;
+    width: 0;
+    background: var(--altin);
+    transition: width .26s ease;
+  }
+  .sayac {
+    position: fixed;
+    right: clamp(26px, 3vw, 52px);
+    bottom: clamp(18px, 2.6vh, 30px);
+    z-index: 20;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(15px, 1.2vw, 19px);
+    letter-spacing: .1em;
+    color: var(--soluk);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- Hareket azaltma ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    .slayt {
+      transition: opacity .01s linear, visibility 0s linear .01s;
+      transform: none;
+    }
+    .slayt.aktif { transition-delay: 0s; }
+    .ilerleme-dolu { transition: none; }
+  }
+</style>
+</head>
+<body>
+<div class="sahne" id="sahne" tabindex="0" role="application" aria-label="Emanet açılış sunumu">
+
+  <section class="slayt kapak">
+    <div class="icerik">
+      <div class="ust-cizgi"></div>
+      <h1 class="kapak-baslik">Emanet</h1>
+      <p class="kapak-alt">2026–2027 Dönemi Açılışı</p>
+      <p class="kapak-kucuk">1. Hafta İstişaresi · Eylül 2026</p>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <h2 class="gundem-baslik">Bu akşam</h2>
+      <ol class="program">
+        <li><span class="no">1</span><span>Bir sohbet <span class="ayrinti">— niçin buradayız</span></span></li>
+        <li><span class="no">2</span><span>Dönemin esasları <span class="ayrinti">— programın iskeleti</span></span></li>
+        <li><span class="no">3</span><span>Hedefleriniz <span class="ayrinti">— herkes kendi hedefini seçecek</span></span></li>
+        <li><span class="no">4</span><span>Sorular ve dua</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="slayt bolum">
+    <div class="icerik">
+      <p class="bolum-kicker">Birinci Bölüm</p>
+      <h2 class="bolum-baslik">Buraya Boşuna Gelmedik</h2>
+      <p class="bolum-alt">açılış sohbeti</p>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <p class="soru-metin">Amerika'dayız. Buraya sıradan bir hayat yaşamaya mı geldik?</p>
+      <p class="soru-alt">Okul, iş, ev… yoksa bir sebeple mi buradayız?</p>
+    </div>
+  </section>
+
+  <section class="slayt ayet">
+    <div class="icerik">
+      <div class="rozet">Ayet</div>
+      <blockquote class="ayet-metin">&#8220;Semayı, arzı ve ikisi arasındaki şeyleri boşuna yaratmadık.&#8221;</blockquote>
+      <p class="kaynak">— Sâd 27</p>
+    </div>
+  </section>
+
+  <section class="slayt ayet">
+    <div class="icerik">
+      <div class="rozet">Ayet</div>
+      <blockquote class="ayet-metin">&#8220;Biz semaları, arzı ve ikisinin arasındakileri oyun olsun diye yaratmadık.&#8221;</blockquote>
+      <p class="kaynak">— Enbiyâ 16</p>
+    </div>
+  </section>
+
+  <section class="slayt ayet">
+    <div class="icerik">
+      <div class="rozet">Ayet</div>
+      <blockquote class="ayet-metin">&#8220;Biz, semaları, arzı ve ikisi arasında bulunanları bir &#8216;oyun ve oyalanma konusu&#8217; olsun diye yaratmadık.&#8221;</blockquote>
+      <p class="kaynak">— Duhân 38</p>
+    </div>
+  </section>
+
+  <section class="slayt ayet">
+    <div class="icerik">
+      <div class="rozet">Ayet</div>
+      <blockquote class="ayet-metin">&#8220;Biz onları yalnızca hak için (bilhakki) yarattık. Ancak onların çoğu bilmezler.&#8221;</blockquote>
+      <p class="kaynak">— Duhân 39</p>
+      <p class="ayet-not">Oyun değilse ne? Hak için.</p>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <blockquote class="kitap-metin kucuk">Her şey bir kaderle yaratılmış. Bütün işler kararlaştırılmıştır.</blockquote>
+    </div>
+  </section>
+
+  <section class="slayt ayet">
+    <div class="icerik">
+      <div class="rozet">Ayet</div>
+      <blockquote class="ayet-metin">&#8220;Her haberin kararlaştırılmış, gerçekleşeceği bir zaman/mekân vardır.&#8221;</blockquote>
+      <p class="kaynak">— En'âm 67</p>
+      <p class="ayet-not">Sadece zaman değil — mekân da.</p>
+    </div>
+  </section>
+
+  <section class="slayt ayet">
+    <div class="icerik">
+      <div class="rozet">Ayet</div>
+      <blockquote class="ayet-metin">&#8220;Hazinesi bizim yanımızda olmayan hiçbir şey yoktur. Bilinen bir kaderi (planı) olmaksızın onu indirmeyiz.&#8221;</blockquote>
+      <p class="kaynak">— Hicr 21</p>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <div class="rozet">Kavram</div>
+      <h2 class="kavram-kelime">AFAK</h2>
+      <p class="kavram-tanim">ufuklar, uzak ülkeler, dünyanın dört bucağı</p>
+      <div class="kavram-govde">
+        <blockquote class="kitap-metin kucuk">Ayetlerin tevillerinin uzak olan gelecekteki ülkelerde, dünyanın dört bucağında ve de varlıkların ufukları olan bilinçlerinde gösterileceği bildirilmiştir.</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="slayt ayet">
+    <div class="icerik">
+      <div class="rozet">Ayet</div>
+      <blockquote class="ayet-metin uzun">&#8220;Biz ayetlerimizi hem afakta hem kendi nefslerinde onlara göstereceğiz; öyle ki, şüphesiz onun hak olduğu kendilerine açıkça belli olsun.&#8221;</blockquote>
+      <p class="kaynak">— Fussilet 53</p>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <p class="vurgu-metin">O uzak ülke… burası.</p>
+      <p class="vurgu-alt">Zaman ve mekân kararlaştırılmış; buraya gelişimiz kaderle.</p>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <p class="vurgu-metin">Peki ne için?</p>
+      <p class="vurgu-alt">Bunu anlamak için önce şuna bakalım: bu evrende herkes ne yapıyor?</p>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <blockquote class="kitap-metin kucuk">Her şey, muazzam bir tertip içerisinde saat gibi işlemektedir. Saati yaratan O, her şeyi bir plana ve ölçüye göre belirlemiştir. Saati oluşturan parçalar, saatin farkında olsa da olmasa da saate hizmet etmektedirler. Zamanı gelen her parça, plana dâhil olarak görevini en iyi şekilde sürdürmektedir.</blockquote>
+    </div>
+  </section>
+
+  <section class="slayt ayet">
+    <div class="icerik">
+      <div class="rozet">Ayet</div>
+      <blockquote class="ayet-metin">&#8220;Arzdakiler ve semadakiler ve onların gölgeleri, sabah akşam, isteseler de istemeseler de Allah&#8217;a secde ederler.&#8221;</blockquote>
+      <p class="kaynak">— Rad 15</p>
+    </div>
+  </section>
+
+  <section class="slayt ayet">
+    <div class="icerik">
+      <div class="rozet">Ayet</div>
+      <blockquote class="ayet-metin">&#8220;O, arzda olanların hepsini sizin için yarattı.&#8221;</blockquote>
+      <p class="kaynak">— Bakara 29</p>
+    </div>
+  </section>
+
+  <section class="slayt ayet">
+    <div class="icerik">
+      <div class="rozet">Ayet</div>
+      <blockquote class="ayet-metin uzun">&#8220;Ve Allah, yarattığı şeylerden sizin için gölgelikler kıldı. Ve sizin için dağlardan barınılacak yerler ve sıcaktan koruyan giysiler ve sizi şiddetli darbelerden koruyan gömlekler kıldı. Sizin üzerinizdeki nimetini işte böyle tamamlıyor. Umulur ki; böylece teslim olursunuz.&#8221;</blockquote>
+      <p class="kaynak">— Nahl 81</p>
+    </div>
+  </section>
+
+  <section class="slayt ayet">
+    <div class="icerik">
+      <div class="rozet">Ayet</div>
+      <blockquote class="ayet-metin">&#8220;Onlarda kendileri için daha nice yararlar ve içecekler vardır. Yine de şükretmeyecekler mi?&#8221;</blockquote>
+      <p class="kaynak">— Yâsîn 73</p>
+    </div>
+  </section>
+
+  <section class="slayt ayet">
+    <div class="icerik">
+      <div class="rozet">Ayet</div>
+      <blockquote class="ayet-metin uzun">&#8220;Görmedin mi ki, gerçekten, semalarda ve arzda olanlar, güneş, ay, yıldızlar, dağlar, ağaçlar, hayvanlar ve <span class="isaret">insanlardan birçoğu</span> Allah'a secde etmektedirler.&#8221;</blockquote>
+      <p class="kaynak">— Hac 18</p>
+      <p class="ayet-not">Hepsi değil — birçoğu.</p>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <p class="vurgu-metin">Parçalar görevini yapıyor. Ya biz?</p>
+    </div>
+  </section>
+
+  <section class="slayt ayet">
+    <div class="icerik">
+      <div class="rozet">Ayet</div>
+      <blockquote class="ayet-metin uzun">&#8220;Rabbin meleklere: &#8216;Muhakkak ki ben arzda bir halife kılacağım.&#8217; demişti. (Melekler de): &#8216;Orada fesat çıkaracak ve kan dökecek birisini mi yaratacaksın? Biz seni, hamd ile tesbih ve seni takdis ediyoruz.&#8217; dediler. (Rabbin de): &#8216;Muhakkak ki ben, sizin bilmediklerinizi bilirim.&#8217; buyurdu.&#8221;</blockquote>
+      <p class="kaynak">— Bakara 30</p>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <blockquote class="kitap-metin kucuk">Yaşanılan zamandaki insan halife değildir; bu göreve ulaşabilmek için imtihandadır. Başarılı olup seçilirse görev verilir.</blockquote>
+      <p class="vurgu-satiri">Yani halifelik elimizde değil — önümüzde.</p>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <blockquote class="kitap-metin kucuk">Şu anda arındırılma planında yer alan varlıklara vaat edilen şey, arz planı gibi boyutların, yönetici kadrosu olan halifelik görevidir.</blockquote>
+    </div>
+  </section>
+
+  <section class="slayt ayet">
+    <div class="icerik">
+      <div class="rozet">Ayet</div>
+      <blockquote class="ayet-metin uzun">&#8220;Allah, sizden iman edenlere ve salih amel işleyenlere, kendilerinden öncekileri arzda halife kıldığı gibi mutlaka onları da halife kılacağını ve onlara, onlar için razı olduğu dinlerini mutlaka sağlamlaştıracağını ve korkularından sonra mutlaka güvenliğe çevireceğini vaat etti.&#8221;</blockquote>
+      <p class="kaynak">— Nûr 55</p>
+      <p class="ayet-not">Vaat şartlı: iman edenlere ve salih amel işleyenlere.</p>
+    </div>
+  </section>
+
+  <section class="slayt ayet">
+    <div class="icerik">
+      <div class="rozet">Ayet</div>
+      <blockquote class="ayet-metin">&#8220;Andolsun, biz Zikir'den sonra Zebur'da da: &#8216;Şüphesiz arz'a salih kullarım varisçi olacaktır&#8217; diye yazdık.&#8221;</blockquote>
+      <p class="kaynak">— Enbiyâ 105</p>
+      <p class="ayet-not">Aynı vaat, her kitapta.</p>
+    </div>
+  </section>
+
+  <section class="slayt ayet">
+    <div class="icerik">
+      <div class="rozet">Ayet</div>
+      <blockquote class="ayet-metin">&#8220;Ey Davut! Muhakkak ki biz, seni arzın halifesi kıldık. Bunun için insanlar arasında hak ile hükmet! Ve hevaya tabi olma.&#8221;</blockquote>
+      <p class="kaynak">— Sâd 26</p>
+      <p class="ayet-not">Halifelik bir makam değil — bir görev.</p>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <blockquote class="kitap-metin kucuk">İlk emanet, Adem (as) yaratıldığı süreçte onun fıtratına kodlanmış halifelik programıdır. Fakat o neslin başarısızlığı sebebiyle emanet insan tarafından tutulamamıştır. Böylece onu taşıyacak olanlar, emanetin kullanımı yerine tekrar o emanete ulaşabilmek için Rahman tarafından arz planlarına indirilmişlerdir.</blockquote>
+      <p class="vurgu-satiri">Bu yüzden bu çalışmanın adı: Emanet.</p>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <p class="vurgu-metin">Biz bir halifeliğin stajındayız.</p>
+      <p class="vurgu-alt">Ve staj, şu andan başlıyor.</p>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <h2 class="gundem-baslik">Staj ne demek?</h2>
+      <ul class="maddeler">
+        <li>Bugün yaptığımız iş küçük değil — bu haftanın kendisi bir vazife</li>
+        <li>Ama aynı zamanda yarın yapacağımız daha büyüğünün çıraklığı</li>
+        <li>Bu hafta gideceğiniz ev, karşınıza oturacak dört çocuk: staj defterinin ilk sayfası</li>
+      </ul>
+      <p class="alt-not">Staj ciddiye alınır: hazırlıkla, düzenle, devamla.</p>
+    </div>
+  </section>
+
+  <section class="slayt ayet">
+    <div class="icerik">
+      <div class="rozet">Ayet</div>
+      <blockquote class="ayet-metin uzun">&#8220;Mallarını Allah yolunda infak edenlerin örneği yedi başak bitiren, her bir başakta yüz tane bulunan bir tek tanenin örneği gibidir. Allah, dilediğine kat kat arttırır.&#8221;</blockquote>
+      <p class="kaynak">— Bakara 261</p>
+      <p class="ayet-not">Bir taneden yedi yüz tane.</p>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <blockquote class="kitap-metin kucuk">Bitkinin yetişmesi, ürün ve tohum verecek hâle gelmesidir.</blockquote>
+      <p class="vurgu-satiri">Çoğalma sayı saymakla değil: önce biz yetişeceğiz ki tohum verelim.</p>
+    </div>
+  </section>
+
+  <section class="slayt ayet">
+    <div class="icerik">
+      <div class="rozet">Ayet</div>
+      <blockquote class="ayet-metin">&#8220;Allah nasıl örnek verdi, görmedin mi? Güzel bir kelime, güzel bir ağaç gibidir. Onun kökü topraktadır. Ve onun dalları semadadır.&#8221;</blockquote>
+      <p class="kaynak">— İbrahim 24</p>
+    </div>
+  </section>
+
+  <section class="slayt dua">
+    <div class="icerik">
+      <div class="rozet">Dua</div>
+      <p class="dua-metin">Bu tohumları yetiştirip, ürününü alıp, içinde bulunduğumuz bu afaklarda — bu uzak ülkelerde — Allah'ın nurunu yaymak dileğiyle.</p>
+    </div>
+  </section>
+
+  <section class="slayt bolum">
+    <div class="icerik">
+      <p class="bolum-kicker">İkinci Bölüm</p>
+      <h2 class="bolum-baslik">Gündemler</h2>
+      <p class="bolum-alt">stajın kuralları</p>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <h2 class="gundem-baslik">Konuşacaklarımız</h2>
+      <ol class="program">
+        <li><span class="no">1</span><span>Bu iş gönül işi <span class="ayrinti">— en önemli gündem</span></span></li>
+        <li><span class="no">2</span><span>Hedefleriniz <span class="ayrinti">— kendi hedefini kendin seç</span></span></li>
+        <li><span class="no">3</span><span>Programın iskeleti <span class="ayrinti">— olmazsa olmazlar</span></span></li>
+        <li><span class="no">4</span><span>Haftalık plan <span class="ayrinti">— istişareden önce bana</span></span></li>
+        <li><span class="no">5</span><span>Çocukları tanıma <span class="ayrinti">— bu haftanın ödevi</span></span></li>
+        <li><span class="no">6</span><span>Ev düzeni <span class="ayrinti">— misafiriz</span></span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <h2 class="gundem-baslik">Bu iş gönül işi</h2>
+      <ul class="maddeler">
+        <li>Çocuklar sizi sevecek — bu iş zorlama işi değil, gönüllerin işi</li>
+        <li>Tehdit yok, sindirme yok, zorlama yok</li>
+        <li>Çocuk sizi sevdi mi her şeyi yapar — en sonunda her şeyi yapar</li>
+        <li>Çocuğun önceki abisinden ya da ailesinden ne gördüğünü bilemiyoruz</li>
+        <li>Tepkili çocuk olabilir; işimiz onu soğutmamak</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <h2 class="gundem-baslik">İlk hafta nasıl geçsin?</h2>
+      <p class="on-cumle">Bu hafta hedefimiz sevdirmek ve tanımak.</p>
+      <ul class="maddeler">
+        <li>Program hafif: tanışma, aktivite, kısa sohbet</li>
+        <li>Herkesin adını, sınıfını, ilgisini öğrenin</li>
+        <li>Bir oyun, bir ikram, bir yürüyüş — çocuk gelmek istesin</li>
+        <li>Ağır konu, uzun ders, sınav havası yok</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <h2 class="gundem-baslik">Hedefleriniz</h2>
+      <p class="on-cumle">Stajdayız — sizin de gelişmeniz için düzenli bir zikriniz olmalı. Zikir farzdır.</p>
+      <ul class="maddeler">
+        <li>Bu sene standart çetele yerine: herkes <span class="ic">kendi</span> hedefini kendi seçiyor</li>
+        <li>Şimdilik en az <span class="ic">1 hedef</span>; isteyen 2 seçer, haftaya ikincisi eklenebilir</li>
+        <li>Her hafta soracağım: ne kadar yaptın, ne kadar yapmadın?</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <h2 class="gundem-baslik">Hedef ne olabilir?</h2>
+      <table class="gruplar-tablo">
+        <tbody>
+          <tr><td class="ad">Kur'an meali</td><td class="zaman">günlük 5–10 sayfa, düşünerek</td></tr>
+          <tr><td class="ad">Ders</td><td class="zaman">düzenli bir ders almak, işlemek</td></tr>
+          <tr><td class="ad">Arapça</td><td class="zaman">okuma, kelime, gramer</td></tr>
+          <tr><td class="ad">Kitap</td><td class="zaman">haftalık sayfa hedefi</td></tr>
+        </tbody>
+      </table>
+      <p class="alt-not">Benim hedeflerim: günlük 2–2,5 saat ders · Arapça Kur'an okuma</p>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <h2 class="gundem-baslik">Hedefi nasıl seç?</h2>
+      <ul class="maddeler">
+        <li>Küçük seç ki devam edebilesin — 5 sayfa her gün, 50 sayfa bir gün'den iyidir</li>
+        <li>Ölçülebilir olsun: sayfa, dakika, gün sayısı</li>
+        <li>Bu akşam bir tane söyle; haftaya artırabilirsin</li>
+      </ul>
+      <p class="alt-not">Herkesten bu akşam bir hedef alacağım.</p>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <h2 class="gundem-baslik">Programın iskeleti</h2>
+      <p class="on-cumle">Bunlar zorunlu; gerisi size kalmış.</p>
+      <ol class="program">
+        <li><span class="no">1</span><span>Sohbet <span class="ayrinti">— sohbetsiz program olmaz</span></span></li>
+        <li><span class="no">2</span><span>Kur'an okuma</span></li>
+        <li><span class="no">3</span><span>Aktivite</span></li>
+        <li><span class="no">4</span><span>Namaz <span class="ayrinti">— birlikte kılınabiliyorsa</span></span></li>
+        <li><span class="no">5</span><span>Kitap + tartışma</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <h2 class="gundem-baslik">1 · Sohbet</h2>
+      <ul class="maddeler">
+        <li>Ortaokulda bir saat tutmaz; 20 dakika hedefleyin</li>
+        <li>Uzun gelirse bölün: 10+10 ya da 15+15</li>
+        <li>8. sınıflar biraz daha taşır — çocukların hâline bakın</li>
+        <li>Konuyu önceden seçin, hazırlıksız girmeyin</li>
+      </ul>
+      <p class="alt-not">Sohbet programın kalbidir; sohbetsiz program olmaz.</p>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <h2 class="gundem-baslik">2 · Kur'an okuma</h2>
+      <ul class="maddeler">
+        <li>Çocukları toplayın, sırayla okusunlar</li>
+        <li>Yanına meal eklenebilir</li>
+        <li>İsteyen Arapça ile meali birlikte yapabilir</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <h2 class="gundem-baslik">3 · Aktivite</h2>
+      <ul class="maddeler">
+        <li>İlla büyük aktivite gerekmez</li>
+        <li>Küçük bir oyun, dışarı çıkıp yürümek bile aktivitedir</li>
+        <li>Arada bir büyük aktivite planlayın</li>
+      </ul>
+      <p class="alt-not">Aktivite çocuğu programa bağlayan şeydir.</p>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <h2 class="gundem-baslik">4 · Kitap ve tartışma</h2>
+      <ul class="maddeler">
+        <li>Kitap okuyacak çocuklarla kitap okuyun</li>
+        <li>Okuduktan sonra mutlaka üstüne konuşun</li>
+        <li>Tartışmasız kitap okuma boşunadır</li>
+      </ul>
+      <p class="alt-not">Bir soru sorun: sen olsan ne yapardın?</p>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <h2 class="gundem-baslik">Serbest kısım</h2>
+      <ul class="maddeler">
+        <li>Yemek, muhabbet, tanışma</li>
+        <li>Meal, Arapça, farklı aktiviteler — size kalmış</li>
+        <li>Program hiçbir zaman dört dörtlük olmaz; arada zamanlar akar gider</li>
+      </ul>
+      <p class="alt-not">Bunu da anlamak lazım — mühim olan devam.</p>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <h2 class="gundem-baslik">Her istişareden önce</h2>
+      <p class="on-cumle">Bundan sonra ödeviniz var.</p>
+      <ul class="maddeler">
+        <li>Gelecek haftanın planını bana yazın: hangi saat ne olacak, hangi sohbet</li>
+        <li>Sohbeti önceden hazırlayan çok iyi yapar</li>
+        <li>Sorabilirim: geçen hafta ne anlattın, çocuklar ne anladı?</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <h2 class="gundem-baslik">Bu haftanın ödevi — tanıma</h2>
+      <p class="on-cumle">Her çocuk için öğrenin ve bana bildirin:</p>
+      <ul class="maddeler">
+        <li>Hangi sureleri biliyor?</li>
+        <li>Namaz durumu nasıl?</li>
+        <li>Kur'an okuması nasıl?</li>
+        <li>Doğum günü ne zaman?</li>
+      </ul>
+      <p class="alt-not">İlk hafta hepsi dolmayabilir — ama çocuğu tanıma arşivimiz buradan başlıyor</p>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <h2 class="gundem-baslik">Çeteleler</h2>
+      <ul class="maddeler">
+        <li>Her mentor kendi öğrencileri için çetele tutacak</li>
+        <li>Format serbest: Excel, defter, not uygulaması — ne kolayınıza geliyorsa</li>
+        <li>Tek şart: benim de görebileceğim bir şekilde olsun</li>
+      </ul>
+      <p class="alt-not">Doğum günü gelen çocuğa programda küçük bir kutlama yapacağız.</p>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <h2 class="gundem-baslik">Ev düzeni</h2>
+      <ul class="maddeler">
+        <li>Evlerde misafiriz — evleri temiz bırakıyoruz</li>
+        <li>Program bitti, çocuklar gitti: temiz hâlin fotoğrafını çekin</li>
+        <li>Fotoğrafı gruba atın</li>
+      </ul>
+      <p class="alt-not">Bu hep sorun oluyordu; bu sene kural.</p>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <h2 class="gundem-baslik">Gruplar</h2>
+      <table class="gruplar-tablo">
+        <tbody>
+          <tr><td class="ad">Emrullah</td><td class="ev">Heron</td><td class="zaman">Cumartesi 10:00–14:00</td></tr>
+          <tr><td class="ad">Hakan Kuzey</td><td class="ev">Rincon</td><td class="zaman">Cumartesi 10:00–14:00</td></tr>
+          <tr><td class="ad">Ertuğrul Tan</td><td class="ev">Rincon</td><td class="zaman">Pazar 12:00–17:00</td></tr>
+          <tr><td class="ad">Hakan Kaplan</td><td class="ev">Heron</td><td class="zaman">Pazar 12:00–17:00</td></tr>
+          <tr><td class="ad">Hayrettin Yıldırım</td><td class="ev">Adeline</td><td class="zaman">Pazar 12:00–17:00</td></tr>
+          <tr><td class="ad">Akif Türk</td><td class="ev">Adeline</td><td class="zaman">Cuma 17:00–22:00</td></tr>
+        </tbody>
+      </table>
+      <p class="alt-not">saatler tahmini; kesinleşince bana bildirin</p>
+    </div>
+  </section>
+
+  <section class="slayt">
+    <div class="icerik">
+      <h2 class="gundem-baslik">Bu hafta benden ne bekliyorum?</h2>
+      <p class="on-cumle">Özet — beş madde.</p>
+      <ul class="maddeler">
+        <li>Programınızı yapın: sohbet + Kur'an + aktivite (hafif tutun)</li>
+        <li>Her çocuğun tanıma bilgisini toplayın</li>
+        <li>Kendi hedefinizi seçin ve bana söyleyin</li>
+        <li>Ev temiz kalsın, çıkışta fotoğraf</li>
+        <li>Gelecek haftanın planını bana yazın</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slayt dua">
+    <div class="icerik">
+      <p class="son-baslik">Hayırlı dönemler.</p>
+      <p class="son-alt">Emanet · 2026–2027</p>
+    </div>
+  </section>
+
+</div>
+
+<div class="ilerleme" aria-hidden="true"><div class="ilerleme-dolu" id="ilerlemeDolu"></div></div>
+<div class="sayac" id="sayac" aria-live="polite"></div>
+
+<script>
+(function () {
+  var sahne = document.getElementById('sahne');
+  var slaytlar = Array.prototype.slice.call(document.querySelectorAll('.slayt'));
+  var dolu = document.getElementById('ilerlemeDolu');
+  var sayac = document.getElementById('sayac');
+  var N = slaytlar.length;
+  var i = -1;
+
+  function git(n) {
+    n = Math.max(0, Math.min(N - 1, n));
+    if (n === i) return;
+    if (i >= 0) {
+      slaytlar[i].classList.remove('aktif');
+      slaytlar[i].setAttribute('aria-hidden', 'true');
+    }
+    i = n;
+    slaytlar[i].classList.add('aktif');
+    slaytlar[i].removeAttribute('aria-hidden');
+    dolu.style.width = (((i + 1) / N) * 100) + '%';
+    sayac.textContent = (i + 1) + ' / ' + N;
+  }
+
+  function ileri() { git(i + 1); }
+  function geri()  { git(i - 1); }
+
+  slaytlar.forEach(function (s) { s.setAttribute('aria-hidden', 'true'); });
+  git(0);
+  sahne.focus({ preventScroll: true });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.altKey || e.ctrlKey || e.metaKey) return;
+    switch (e.key) {
+      case 'ArrowRight':
+      case 'ArrowDown':
+      case 'PageDown':
+      case ' ':
+      case 'Spacebar':
+        e.preventDefault(); ileri(); break;
+      case 'ArrowLeft':
+      case 'ArrowUp':
+      case 'PageUp':
+        e.preventDefault(); geri(); break;
+      case 'Home':
+        e.preventDefault(); git(0); break;
+      case 'End':
+        e.preventDefault(); git(N - 1); break;
+    }
+  });
+
+  document.addEventListener('click', function () { ileri(); });
+
+  var bx = 0, by = 0, dokunma = false;
+  document.addEventListener('touchstart', function (e) {
+    if (e.touches.length !== 1) return;
+    dokunma = true;
+    bx = e.touches[0].clientX;
+    by = e.touches[0].clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', function (e) {
+    if (!dokunma) return;
+    dokunma = false;
+    var t = e.changedTouches[0];
+    var dx = t.clientX - bx;
+    var dy = t.clientY - by;
+    if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy)) {
+      e.preventDefault();
+      if (dx < 0) { ileri(); } else { geri(); }
+    }
+  }, { passive: false });
+})();
+</script>
+</body>
+</html>
