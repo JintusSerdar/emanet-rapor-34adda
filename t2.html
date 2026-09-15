@@ -1,0 +1,863 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>">
+<title>Emanet</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Serif:wght@600&display=swap">
+<style>
+:root {
+  --bg: #faf9f5; --surface: #ffffff; --ink: #26251f; --muted: #6f6c62;
+  --line: #e3e0d6; --accent: #3b66b0;
+  --head-bg: #4a86e8; --head-ink: #ffffff;
+  --mentor-bg: #ffe86b; --mentor-ink: #2a2510;
+  --ok: #2e7d4f; --no: #b3423a; --chip-bg: #eeece4;
+  --cok-bg: #c8e3d0; --cok-ink: #1b3a28; --cno-bg: #eab7b1; --cno-ink: #4a1f1a;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1f1e1b; --surface: #282723; --ink: #e8e5dc; --muted: #a39f92;
+    --line: #3b3a34; --accent: #8db0e8;
+    --head-bg: #2f4f8f; --head-ink: #eef2fb;
+    --mentor-bg: #4a4020; --mentor-ink: #f0e6b0;
+    --ok: #7cc99a; --no: #e09088; --chip-bg: #33322c;
+    --cok-bg: #2e4a3a; --cok-ink: #cfeeda; --cno-bg: #5a2f2c; --cno-ink: #f3cfc9;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1f1e1b; --surface: #282723; --ink: #e8e5dc; --muted: #a39f92;
+  --line: #3b3a34; --accent: #8db0e8;
+  --head-bg: #2f4f8f; --head-ink: #eef2fb;
+  --mentor-bg: #4a4020; --mentor-ink: #f0e6b0;
+  --ok: #7cc99a; --no: #e09088; --chip-bg: #33322c;
+  --cok-bg: #2e4a3a; --cok-ink: #cfeeda; --cno-bg: #5a2f2c; --cno-ink: #f3cfc9;
+}
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  margin: 0; line-height: 1.55;
+}
+.sayfa { max-width: 1080px; margin: 0 auto; padding: 40px 20px 64px; }
+header h1 {
+  font-family: "IBM Plex Serif", Georgia, serif;
+  font-size: 2rem; margin: 0 0 4px; text-wrap: balance;
+}
+header .tanim { color: var(--muted); margin: 0 0 14px; }
+.çipler { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.çip {
+  background: var(--chip-bg); border: 1px solid var(--line);
+  border-radius: 999px; padding: 3px 12px; font-size: 0.85rem;
+}
+section { margin-top: 40px; }
+section h2 {
+  font-size: 1.15rem; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--accent); border-bottom: 2px solid var(--line);
+  padding-bottom: 6px; margin: 0 0 16px;
+}
+.tablo-kap { overflow-x: auto; }
+table {
+  border-collapse: collapse; width: 100%;
+  font-variant-numeric: tabular-nums; font-size: 0.95rem;
+  background: var(--surface);
+}
+th, td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; }
+table.kadro thead th { background: var(--head-bg); color: var(--head-ink); }
+table.kadro tbody tr.mentor td {
+  background: var(--mentor-bg); color: var(--mentor-ink); font-weight: 600;
+}
+table.yok th, table.ist th { background: var(--chip-bg); }
+table.yok td:not(:first-child), table.yok th:not(:first-child),
+table.ist td:not(:first-child), table.ist th:not(:first-child) { text-align: center; }
+tr.toplam td { border-top: 2px solid var(--line); font-weight: 600; }
+table.bilgi td { text-align: left !important; white-space: normal; }
+table.bilgi td:first-child { color: var(--muted); width: 11em; }
+.cipler { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+.cip-o {
+  font: inherit; padding: 8px 14px; border-radius: 999px;
+  border: 1px solid var(--line); cursor: pointer;
+}
+.cip-o.g1 { background: var(--cok-bg); color: var(--cok-ink); }
+.cip-o.g0 { background: var(--cno-bg); color: var(--cno-ink); }
+.cip-o:focus-visible { outline: 2px solid var(--accent); }
+.giris-alt { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.giris-alt input {
+  font: inherit; padding: 7px 10px; border: 1px solid var(--line);
+  border-radius: 6px; background: var(--surface); color: var(--ink); width: 14em;
+}
+button.kaydet {
+  font: inherit; font-weight: 600; padding: 8px 20px; cursor: pointer;
+  border: 1px solid var(--accent); border-radius: 6px;
+  background: var(--accent); color: var(--head-ink);
+}
+button.kaydet:disabled { opacity: 0.6; }
+.filtreler {
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 12px;
+}
+.filtreler input[type="text"], .filtreler select {
+  padding: 6px 10px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--surface); color: var(--ink); font: inherit;
+}
+.filtreler input[type="text"]:focus-visible, .filtreler select:focus-visible {
+  outline: 2px solid var(--accent);
+}
+table.matris th, table.matris td { white-space: nowrap; }
+table.matris td:not(:first-child):not(:nth-child(3)) { text-align: center; }
+table.matris td.c1 { background: var(--cok-bg); color: var(--cok-ink); }
+table.matris td.c0 { background: var(--cno-bg); color: var(--cno-ink); }
+table.matris td.cna { color: var(--muted); }
+table.matris th:first-child, table.matris td:first-child {
+  position: sticky; left: 0; background: var(--surface); z-index: 1;
+}
+table.matris thead th:first-child { background: var(--chip-bg); }
+table.matris thead th { background: var(--chip-bg); }
+table.matris tfoot td { font-weight: 600; border-top: 2px solid var(--line); }
+#s-ad, #s-oran { cursor: pointer; }
+.sum { font-weight: 600; }
+.ok { color: var(--ok); font-weight: 700; }
+.no { color: var(--no); font-weight: 700; }
+.na { color: var(--muted); }
+.hafta-kart {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: 8px; padding: 14px 16px; margin-bottom: 16px;
+}
+.hafta-kart h3 { margin: 0 0 6px; font-size: 1.05rem; }
+details.ogr {
+  border: 1px solid var(--line); border-radius: 6px;
+  margin-bottom: 8px; background: var(--surface);
+}
+details.ogr summary { cursor: pointer; padding: 8px 12px; font-weight: 600; }
+details.ogr summary:focus-visible { outline: 2px solid var(--accent); }
+details.ogr[open] summary { border-bottom: 1px solid var(--line); }
+details.ogr .tablo-kap { padding: 8px 12px; }
+details.ogr table { font-size: 0.9rem; }
+.kart { margin-bottom: 24px; }
+.kart h3 { margin: 0 0 8px; font-size: 1rem; }
+.kart .alt { color: var(--muted); font-weight: 400; font-size: 0.88rem; }
+table.kadro .prog {
+  display: block; font-size: 0.76rem; font-weight: 400; opacity: 0.85;
+}
+.kartlar { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px 28px; }
+.not { color: var(--muted); font-size: 0.9rem; }
+footer {
+  margin-top: 48px; padding-top: 14px; border-top: 1px solid var(--line);
+  color: var(--muted); font-size: 0.85rem;
+}
+
+.ozet-izgara { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px; }
+.ozet-kart { background:var(--surface); border:1px solid var(--line); border-radius:10px;
+  padding:14px 16px; border-left:5px solid var(--line); }
+.ozet-kart.iyi { border-left-color:var(--ok); }
+.ozet-kart.orta { border-left-color:#d9a94b; }
+.ozet-kart.kotu { border-left-color:var(--no); }
+.ozet-kart.bos { border-left-color:var(--muted); }
+.ozet-kart h3 { margin:0 0 4px; font-size:1rem; }
+.ozet-yoklama { margin:6px 0 2px; }
+.rakam { font-size:1.7rem; font-weight:700; font-variant-numeric:tabular-nums; }
+.rakam.bos { color:var(--muted); }
+.ozet-hedef { margin-top:10px; padding-top:10px; border-top:1px solid var(--line); font-size:0.92rem; }
+.etiket-k { display:inline-block; min-width:5.5em; color:var(--muted); font-size:0.8rem;
+  text-transform:uppercase; letter-spacing:.04em; }
+.hedef-kutu { margin:8px 0 12px; }
+.hedef-kutu ol { margin:4px 0 0; padding-left:22px; }
+.ikili { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; }
+.sekmeler {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-top: 28px; border-bottom: 2px solid var(--line);
+}
+.sekmeler button {
+  font: inherit; padding: 8px 18px; cursor: pointer;
+  border: 1px solid var(--line); border-bottom: none;
+  border-radius: 8px 8px 0 0; background: var(--chip-bg); color: var(--ink);
+}
+.sekmeler button.aktif {
+  background: var(--surface); color: var(--accent);
+  font-weight: 600; border-color: var(--accent);
+}
+.sekmeler button:focus-visible { outline: 2px solid var(--accent); }
+.tab > section:first-child { margin-top: 24px; }
+.icerik { padding: 8px 14px; }
+.icerik h4 { margin: 10px 0 4px; }
+blockquote {
+  border-left: 3px solid var(--accent); margin: 8px 0;
+  padding: 4px 12px; color: var(--muted);
+}
+</style>
+<div class="sayfa">
+<header>
+<h1>Emanet</h1>
+<p class="tanim">Bay Area ortaokul çalışması · 2026–2027 dönemi</p>
+<div class="çipler">
+<span class="çip">Güncelleme: 2026-09-15</span>
+<span class="çip">6 grup</span>
+<span class="çip">6 mentor</span>
+<span class="çip">34 öğrenci</span>
+</div>
+</header>
+
+<nav class="sekmeler">
+<button type="button" data-tab="ozet" class="aktif">Özet</button>
+<button type="button" data-tab="yoklama">Yoklama</button>
+<button type="button" data-tab="ogrenciler">Öğrenciler</button>
+<button type="button" data-tab="mentorler">Mentorler</button>
+<button type="button" data-tab="haftalar">Haftalar</button>
+<button type="button" data-tab="sohbetler">Sohbetler</button>
+</nav>
+
+<div class="tab" id="tab-ozet">
+<section>
+<h2>Son Durum — 1. Hafta · 31 Ağustos – 6 Eylül 2026</h2>
+<p class="not"><strong>Yoklaması girilmemiş hafta: 2. Hafta</strong><br>Her grup için katılım ve mentorun hedef durumu. Renkli şerit: yeşil %80+, sarı %50+, kırmızı altı, gri yoklama girilmedi.</p>
+<div class="ozet-izgara">
+<div class="ozet-kart orta">
+<h3>Emrullah <span class="alt">Emrullah Grubu</span></h3>
+<p class="ozet-yoklama"><span class="rakam">2/4</span> <span class="not">%50</span></p>
+<p class="not">Gelmeyen: Taha İstek, Fatih Aygar</p>
+<p class="ozet-hedef"><span class="etiket-k">Hedef</span> Haftada 5 sayfa Kur'an Arapçası + meali<br><span class="etiket-k">Bu hafta</span> yaptı</p>
+</div><div class="ozet-kart orta">
+<h3>Hakan Kuzey <span class="alt">Hakan Kuzey Grubu</span></h3>
+<p class="ozet-yoklama"><span class="rakam">4/6</span> <span class="not">%67</span></p>
+<p class="not">Gelmeyen: Levent Balaban, Mete Kaygısız</p>
+<p class="ozet-hedef"><span class="etiket-k">Hedef</span> Haftada 50 sayfa kitap<br><span class="etiket-k">Bu hafta</span> yapılmadı</p>
+</div><div class="ozet-kart iyi">
+<h3>Ertuğrul Tan <span class="alt">Ertuğrul Tan Grubu</span></h3>
+<p class="ozet-yoklama"><span class="rakam">6/6</span> <span class="not">%100</span></p>
+<p class="not">Herkes geldi</p>
+<p class="ozet-hedef"><span class="etiket-k">Hedef</span> Kur'an Arapçası + meali — haftada 20 sayfa<br><span class="etiket-k">Bu hafta</span> 10 sayfa Arapça, 3 sayfa meal</p>
+</div><div class="ozet-kart iyi">
+<h3>Hakan Kaplan <span class="alt">Hakan Kaplan Grubu</span></h3>
+<p class="ozet-yoklama"><span class="rakam">5/6</span> <span class="not">%83</span></p>
+<p class="not">Gelmeyen: Fatih Sağır</p>
+<p class="ozet-hedef"><span class="etiket-k">Hedef</span> Her gün 15 dakika Kur'an meali<br><span class="etiket-k">Bu hafta</span> yaptı</p>
+</div><div class="ozet-kart iyi">
+<h3>Hayrettin Yıldırım <span class="alt">Hayrettin Yıldırım Grubu</span></h3>
+<p class="ozet-yoklama"><span class="rakam">5/6</span> <span class="not">%83</span></p>
+<p class="not">Gelmeyen: Murad Peker</p>
+<p class="ozet-hedef"><span class="etiket-k">Hedef</span> Haftada 1 cüz Kur'an Arapçası + yarısı meal<br><span class="etiket-k">Bu hafta</span> yaptı</p>
+</div><div class="ozet-kart orta">
+<h3>Akif Türk <span class="alt">Akif Türk Grubu</span></h3>
+<p class="ozet-yoklama"><span class="rakam">3/4</span> <span class="not">%75</span></p>
+<p class="not">Gelmeyen: Mustafa Keskin</p>
+<p class="ozet-hedef"><span class="etiket-k">Hedef</span> Her hafta 1 sayfa ezber<br><span class="etiket-k">Bu hafta</span> yaptı</p>
+</div>
+</div>
+</section>
+
+<section>
+<h2>Dikkat İsteyenler</h2>
+<div class="ikili">
+<div><h3>Teması gecikenler (21 gün+)</h3><ul><li>Taha İstek — hiç temas yok</li><li>Mustafa Keskin — hiç temas yok</li><li>Murad Peker — hiç temas yok</li><li>Mete Kaygısız — hiç temas yok</li><li>Levent Balaban — hiç temas yok</li><li>Fatih Sağır — hiç temas yok</li><li>Fatih Aygar — hiç temas yok</li><li>Ali Öztürk — hiç temas yok</li><li>Ahmet Öztürk — hiç temas yok</li></ul></div>
+<div><h3>Eksik veriler</h3><ul><li>34 öğrencinin doğum günü boş</li><li>34 öğrencinin tanıma bilgisi boş</li></ul></div>
+</div>
+</section>
+</div>
+
+<div class="tab" id="tab-yoklama" hidden>
+
+<section>
+<h2>Yoklama</h2>
+<p class="not"><span class="ok">1</span> geldi · <span class="no">0</span> gelmedi · – yoklama alınmadı. Başlıktaki İsim/Toplam'a tıkla: sıralar.</p>
+<div class="filtreler">
+<input type="text" id="f-ad" placeholder="İsim ara">
+<select id="f-sinif"><option value="">Sınıf: tümü</option><option value="6">6. sınıf</option><option value="7">7. sınıf</option><option value="8">8. sınıf</option></select>
+<select id="f-rehber"><option value="">Rehber: tümü</option><option value="Emrullah">Emrullah</option><option value="Hakan Kuzey">Hakan Kuzey</option><option value="Ertuğrul Tan">Ertuğrul Tan</option><option value="Hakan Kaplan">Hakan Kaplan</option><option value="Hayrettin Yıldırım">Hayrettin Yıldırım</option><option value="Akif Türk">Akif Türk</option></select>
+<label><input type="checkbox" id="f-dev"> devamsızlığı olanlar</label>
+<span class="not"><span id="m-sayi">0</span> öğrenci</span>
+</div>
+<div class="tablo-kap"><table class="matris" id="matris">
+<thead><tr><th id="s-ad">İsim ⇅</th><th>Sınıf</th><th>Rehber</th><th>31 Ağu</th><th>7 Eyl</th><th id="s-oran">Toplam ⇅</th></tr></thead>
+<tbody><tr data-ad="erkan aslan" data-sinif="6" data-rehber="Emrullah" data-dev="0" data-oran="100"><td>Erkan Aslan</td><td>6</td><td>Emrullah</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="ahmet musa" data-sinif="6" data-rehber="Emrullah" data-dev="0" data-oran="100"><td>Ahmet Musa</td><td>6</td><td>Emrullah</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="taha i̇stek" data-sinif="6" data-rehber="Emrullah" data-dev="1" data-oran="0"><td>Taha İstek</td><td>6</td><td>Emrullah</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
+<tr data-ad="fatih aygar" data-sinif="6" data-rehber="Emrullah" data-dev="1" data-oran="0"><td>Fatih Aygar</td><td>6</td><td>Emrullah</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
+<tr data-ad="ahmet öztürk" data-sinif="6" data-rehber="Emrullah" data-dev="0" data-oran="-1"><td>Ahmet Öztürk</td><td>6</td><td>Emrullah</td><td class="cna">–</td><td class="cna">–</td><td class="sum">–</td></tr>
+<tr data-ad="ali öztürk" data-sinif="6" data-rehber="Emrullah" data-dev="0" data-oran="-1"><td>Ali Öztürk</td><td>6</td><td>Emrullah</td><td class="cna">–</td><td class="cna">–</td><td class="sum">–</td></tr>
+<tr data-ad="levent balaban" data-sinif="6" data-rehber="Hakan Kuzey" data-dev="1" data-oran="0"><td>Levent Balaban</td><td>6</td><td>Hakan Kuzey</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
+<tr data-ad="taha çetindil" data-sinif="6" data-rehber="Hakan Kuzey" data-dev="0" data-oran="100"><td>Taha Çetindil</td><td>6</td><td>Hakan Kuzey</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="hayreddin tiryaki" data-sinif="6" data-rehber="Hakan Kuzey" data-dev="0" data-oran="100"><td>Hayreddin Tiryaki</td><td>6</td><td>Hakan Kuzey</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="yusuf pala" data-sinif="6" data-rehber="Hakan Kuzey" data-dev="0" data-oran="100"><td>Yusuf Pala</td><td>6</td><td>Hakan Kuzey</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="mete kaygısız" data-sinif="6" data-rehber="Hakan Kuzey" data-dev="1" data-oran="0"><td>Mete Kaygısız</td><td>6</td><td>Hakan Kuzey</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
+<tr data-ad="metin yıldız" data-sinif="6" data-rehber="Hakan Kuzey" data-dev="0" data-oran="100"><td>Metin Yıldız</td><td>6</td><td>Hakan Kuzey</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="numan pamuk" data-sinif="7" data-rehber="Ertuğrul Tan" data-dev="0" data-oran="100"><td>Numan Pamuk</td><td>7</td><td>Ertuğrul Tan</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="ahmet öztürk" data-sinif="7" data-rehber="Ertuğrul Tan" data-dev="0" data-oran="100"><td>Ahmet Öztürk</td><td>7</td><td>Ertuğrul Tan</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="selim keskin" data-sinif="7" data-rehber="Ertuğrul Tan" data-dev="0" data-oran="100"><td>Selim Keskin</td><td>7</td><td>Ertuğrul Tan</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="orhan ark" data-sinif="7" data-rehber="Ertuğrul Tan" data-dev="0" data-oran="100"><td>Orhan Ark</td><td>7</td><td>Ertuğrul Tan</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="hüseyin nazarov" data-sinif="7" data-rehber="Ertuğrul Tan" data-dev="0" data-oran="100"><td>Hüseyin Nazarov</td><td>7</td><td>Ertuğrul Tan</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="murat yıldız" data-sinif="7" data-rehber="Ertuğrul Tan" data-dev="0" data-oran="100"><td>Murat Yıldız</td><td>7</td><td>Ertuğrul Tan</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="mehmet uyarer" data-sinif="7" data-rehber="Hakan Kaplan" data-dev="0" data-oran="100"><td>Mehmet Uyarer</td><td>7</td><td>Hakan Kaplan</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="lokman keskin" data-sinif="7" data-rehber="Hakan Kaplan" data-dev="0" data-oran="100"><td>Lokman Keskin</td><td>7</td><td>Hakan Kaplan</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="berat sönmez" data-sinif="7" data-rehber="Hakan Kaplan" data-dev="0" data-oran="100"><td>Berat Sönmez</td><td>7</td><td>Hakan Kaplan</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="fatih sağır" data-sinif="7" data-rehber="Hakan Kaplan" data-dev="1" data-oran="0"><td>Fatih Sağır</td><td>7</td><td>Hakan Kaplan</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
+<tr data-ad="salahaddin shamil" data-sinif="7" data-rehber="Hakan Kaplan" data-dev="0" data-oran="100"><td>Salahaddin Shamil</td><td>7</td><td>Hakan Kaplan</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="salih başar" data-sinif="7" data-rehber="Hakan Kaplan" data-dev="0" data-oran="100"><td>Salih Başar</td><td>7</td><td>Hakan Kaplan</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="yunus özgen" data-sinif="7" data-rehber="Hayrettin Yıldırım" data-dev="0" data-oran="100"><td>Yunus Özgen</td><td>7</td><td>Hayrettin Yıldırım</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="murad peker" data-sinif="7" data-rehber="Hayrettin Yıldırım" data-dev="1" data-oran="0"><td>Murad Peker</td><td>7</td><td>Hayrettin Yıldırım</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
+<tr data-ad="i̇brahim keçicioğlu" data-sinif="7" data-rehber="Hayrettin Yıldırım" data-dev="0" data-oran="100"><td>İbrahim Keçicioğlu</td><td>7</td><td>Hayrettin Yıldırım</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="fatih oruç" data-sinif="7" data-rehber="Hayrettin Yıldırım" data-dev="0" data-oran="100"><td>Fatih Oruç</td><td>7</td><td>Hayrettin Yıldırım</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="akif göçeri" data-sinif="7" data-rehber="Hayrettin Yıldırım" data-dev="0" data-oran="100"><td>Akif Göçeri</td><td>7</td><td>Hayrettin Yıldırım</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="halil mercan" data-sinif="7" data-rehber="Hayrettin Yıldırım" data-dev="0" data-oran="100"><td>Halil Mercan</td><td>7</td><td>Hayrettin Yıldırım</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="sadık kaparov" data-sinif="8" data-rehber="Akif Türk" data-dev="0" data-oran="100"><td>Sadık Kaparov</td><td>8</td><td>Akif Türk</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="hasan gürel" data-sinif="8" data-rehber="Akif Türk" data-dev="0" data-oran="100"><td>Hasan Gürel</td><td>8</td><td>Akif Türk</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="salih türk" data-sinif="8" data-rehber="Akif Türk" data-dev="0" data-oran="100"><td>Salih Türk</td><td>8</td><td>Akif Türk</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="mustafa keskin" data-sinif="8" data-rehber="Akif Türk" data-dev="1" data-oran="0"><td>Mustafa Keskin</td><td>8</td><td>Akif Türk</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
+</tbody>
+<tfoot><tr><td colspan="3">Haftalık katılım</td><td></td><td></td><td></td></tr></tfoot>
+</table></div>
+</section>
+<script>
+(function () {
+  var tbl = document.getElementById('matris');
+  var rows = Array.prototype.slice.call(tbl.tBodies[0].rows);
+  var fAd = document.getElementById('f-ad'), fSinif = document.getElementById('f-sinif'),
+      fReh = document.getElementById('f-rehber'), fDev = document.getElementById('f-dev');
+  var haftaN = 2;
+  function ozet() {
+    var gorunen = rows.filter(function (r) { return !r.hidden; });
+    document.getElementById('m-sayi').textContent = gorunen.length;
+    var foot = tbl.tFoot.rows[0];
+    for (var i = 0; i < haftaN; i++) {
+      var g = 0, t = 0;
+      gorunen.forEach(function (r) {
+        var c = r.cells[3 + i].className;
+        if (c === 'c1') { g++; t++; } else if (c === 'c0') { t++; }
+      });
+      foot.cells[1 + i].textContent = t ? '%' + Math.round(100 * g / t) : '–';
+    }
+  }
+  function uygula() {
+    var ad = fAd.value.toLocaleLowerCase('tr');
+    rows.forEach(function (r) {
+      var ok = true;
+      if (ad && r.dataset.ad.indexOf(ad) < 0) ok = false;
+      if (fSinif.value && r.dataset.sinif !== fSinif.value) ok = false;
+      if (fReh.value && r.dataset.rehber !== fReh.value) ok = false;
+      if (fDev.checked && r.dataset.dev !== '1') ok = false;
+      r.hidden = !ok;
+    });
+    ozet();
+  }
+  var yon = { ad: 1, oran: 1 };
+  function sirala(key) {
+    yon[key] = -yon[key];
+    rows.sort(function (a, b) {
+      if (key === 'ad') return yon.ad * a.dataset.ad.localeCompare(b.dataset.ad, 'tr');
+      return yon.oran * (Number(a.dataset.oran) - Number(b.dataset.oran));
+    });
+    rows.forEach(function (r) { tbl.tBodies[0].appendChild(r); });
+  }
+  document.getElementById('s-ad').addEventListener('click', function () { sirala('ad'); });
+  document.getElementById('s-oran').addEventListener('click', function () { sirala('oran'); });
+  [fAd, fSinif, fReh].forEach(function (e) { e.addEventListener('input', uygula); });
+  fDev.addEventListener('change', uygula);
+  uygula();
+})();
+</script>
+
+<section>
+<h2>İstişare Katılımı</h2>
+<div class="tablo-kap"><table class="ist">
+<thead><tr><th>Mentor</th><th>31 Ağu</th><th>7 Eyl</th><th>Toplam</th></tr></thead>
+<tbody><tr><td>Emrullah</td><td><span class="ok">✓</span></td><td><span class="na">–</span></td><td class='sum'>1/1</td></tr>
+<tr><td>Hakan Kuzey</td><td><span class="ok">✓</span></td><td><span class="na">–</span></td><td class='sum'>1/1</td></tr>
+<tr><td>Ertuğrul Tan</td><td><span class="ok">✓</span></td><td><span class="na">–</span></td><td class='sum'>1/1</td></tr>
+<tr><td>Hakan Kaplan</td><td><span class="ok">✓</span></td><td><span class="na">–</span></td><td class='sum'>1/1</td></tr>
+<tr><td>Hayrettin Yıldırım</td><td><span class="ok">✓</span></td><td><span class="na">–</span></td><td class='sum'>1/1</td></tr>
+<tr><td>Akif Türk</td><td><span class="ok">✓</span></td><td><span class="na">–</span></td><td class='sum'>1/1</td></tr>
+</tbody>
+</table></div>
+</section>
+</div>
+
+<div class="tab" id="tab-ogrenciler" hidden>
+<section>
+<h2>Kadro</h2>
+<div class="tablo-kap"><table class="kadro">
+<thead><tr><th>6. SINIF</th><th>6. SINIF</th><th>7. SINIF</th><th>7. SINIF</th><th>7. SINIF</th><th>8. SINIF</th></tr></thead>
+<tbody><tr class="mentor"><td>Emrullah<span class="prog">Cumartesi · Heron evi · 10:00–14:00</span></td><td>Hakan Kuzey<span class="prog">Cumartesi · Rincon evi · 10:00–14:00</span></td><td>Ertuğrul Tan<span class="prog">Pazar · Rincon evi · 12:00–17:00</span></td><td>Hakan Kaplan<span class="prog">Pazar · Heron evi · 12:00–17:00</span></td><td>Hayrettin Yıldırım<span class="prog">Pazar · Adeline evi · 12:00–17:00</span></td><td>Akif Türk<span class="prog">Cuma akşamı · Adeline evi · 17:00–22:00</span></td></tr>
+<tr><td>Erkan Aslan</td><td>Levent Balaban</td><td>Numan Pamuk</td><td>Mehmet Uyarer</td><td>Yunus Özgen</td><td>Sadık Kaparov</td></tr>
+<tr><td>Ahmet Musa</td><td>Taha Çetindil</td><td>Ahmet Öztürk</td><td>Lokman Keskin</td><td>Murad Peker</td><td>Hasan Gürel</td></tr>
+<tr><td>Taha İstek</td><td>Hayreddin Tiryaki</td><td>Selim Keskin</td><td>Berat Sönmez</td><td>İbrahim Keçicioğlu</td><td>Salih Türk</td></tr>
+<tr><td>Fatih Aygar</td><td>Yusuf Pala</td><td>Orhan Ark</td><td>Fatih Sağır</td><td>Fatih Oruç</td><td>Mustafa Keskin</td></tr>
+<tr><td>Ahmet Öztürk</td><td>Mete Kaygısız</td><td>Hüseyin Nazarov</td><td>Salahaddin Shamil</td><td>Akif Göçeri</td><td></td></tr>
+<tr><td>Ali Öztürk</td><td>Metin Yıldız</td><td>Murat Yıldız</td><td>Salih Başar</td><td>Halil Mercan</td><td></td></tr>
+</tbody>
+</table></div>
+</section>
+
+<section>
+<h2>Öğrenci Bilgileri</h2>
+<p class="not">Öğrenciye tıkla: grup, katılım ve devamsızlık bilgisi. Veli/iletişim bilgileri yalnız özel paneldedir.</p>
+<div class="kart">
+<h3>Emrullah Grubu <span class="alt">6. sınıf · Emrullah · Cumartesi · Heron evi · 10:00–14:00</span></h3>
+<details class="ogr"><summary>Erkan Aslan <span class="alt">katılım 1/1</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Emrullah Grubu · Cumartesi · Heron evi · 10:00–14:00</td></tr>
+<tr><td>Sınıf</td><td>6. sınıf</td></tr>
+<tr><td>Katılım</td><td>1/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Ahmet Musa <span class="alt">katılım 1/1</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Emrullah Grubu · Cumartesi · Heron evi · 10:00–14:00</td></tr>
+<tr><td>Sınıf</td><td>6. sınıf</td></tr>
+<tr><td>Katılım</td><td>1/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Taha İstek <span class="alt">katılım 0/1 · 1 devamsızlık</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Emrullah Grubu · Cumartesi · Heron evi · 10:00–14:00</td></tr>
+<tr><td>Sınıf</td><td>6. sınıf</td></tr>
+<tr><td>Katılım</td><td>0/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>1. Hafta</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Fatih Aygar <span class="alt">katılım 0/1 · 1 devamsızlık</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Emrullah Grubu · Cumartesi · Heron evi · 10:00–14:00</td></tr>
+<tr><td>Sınıf</td><td>6. sınıf</td></tr>
+<tr><td>Katılım</td><td>0/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>1. Hafta</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Ahmet Öztürk <span class="alt">katılım –</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Emrullah Grubu · Cumartesi · Heron evi · 10:00–14:00</td></tr>
+<tr><td>Sınıf</td><td>6. sınıf</td></tr>
+<tr><td>Katılım</td><td>–</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Ali Öztürk <span class="alt">katılım –</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Emrullah Grubu · Cumartesi · Heron evi · 10:00–14:00</td></tr>
+<tr><td>Sınıf</td><td>6. sınıf</td></tr>
+<tr><td>Katılım</td><td>–</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+</div>
+<div class="kart">
+<h3>Hakan Kuzey Grubu <span class="alt">6. sınıf · Hakan Kuzey · Cumartesi · Rincon evi · 10:00–14:00</span></h3>
+<details class="ogr"><summary>Levent Balaban <span class="alt">katılım 0/1 · 1 devamsızlık</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Hakan Kuzey Grubu · Cumartesi · Rincon evi · 10:00–14:00</td></tr>
+<tr><td>Sınıf</td><td>6. sınıf</td></tr>
+<tr><td>Katılım</td><td>0/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>1. Hafta</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Taha Çetindil <span class="alt">katılım 1/1</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Hakan Kuzey Grubu · Cumartesi · Rincon evi · 10:00–14:00</td></tr>
+<tr><td>Sınıf</td><td>6. sınıf</td></tr>
+<tr><td>Katılım</td><td>1/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Hayreddin Tiryaki <span class="alt">katılım 1/1</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Hakan Kuzey Grubu · Cumartesi · Rincon evi · 10:00–14:00</td></tr>
+<tr><td>Sınıf</td><td>6. sınıf</td></tr>
+<tr><td>Katılım</td><td>1/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Yusuf Pala <span class="alt">katılım 1/1</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Hakan Kuzey Grubu · Cumartesi · Rincon evi · 10:00–14:00</td></tr>
+<tr><td>Sınıf</td><td>6. sınıf</td></tr>
+<tr><td>Katılım</td><td>1/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Mete Kaygısız <span class="alt">katılım 0/1 · 1 devamsızlık</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Hakan Kuzey Grubu · Cumartesi · Rincon evi · 10:00–14:00</td></tr>
+<tr><td>Sınıf</td><td>6. sınıf</td></tr>
+<tr><td>Katılım</td><td>0/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>1. Hafta</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Metin Yıldız <span class="alt">katılım 1/1</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Hakan Kuzey Grubu · Cumartesi · Rincon evi · 10:00–14:00</td></tr>
+<tr><td>Sınıf</td><td>6. sınıf</td></tr>
+<tr><td>Katılım</td><td>1/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+</div>
+<div class="kart">
+<h3>Ertuğrul Tan Grubu <span class="alt">7. sınıf · Ertuğrul Tan · Pazar · Rincon evi · 12:00–17:00</span></h3>
+<details class="ogr"><summary>Numan Pamuk <span class="alt">katılım 1/1</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Ertuğrul Tan Grubu · Pazar · Rincon evi · 12:00–17:00</td></tr>
+<tr><td>Sınıf</td><td>7. sınıf</td></tr>
+<tr><td>Katılım</td><td>1/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Ahmet Öztürk <span class="alt">katılım 1/1</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Ertuğrul Tan Grubu · Pazar · Rincon evi · 12:00–17:00</td></tr>
+<tr><td>Sınıf</td><td>7. sınıf</td></tr>
+<tr><td>Katılım</td><td>1/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Selim Keskin <span class="alt">katılım 1/1</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Ertuğrul Tan Grubu · Pazar · Rincon evi · 12:00–17:00</td></tr>
+<tr><td>Sınıf</td><td>7. sınıf</td></tr>
+<tr><td>Katılım</td><td>1/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Orhan Ark <span class="alt">katılım 1/1</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Ertuğrul Tan Grubu · Pazar · Rincon evi · 12:00–17:00</td></tr>
+<tr><td>Sınıf</td><td>7. sınıf</td></tr>
+<tr><td>Katılım</td><td>1/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Hüseyin Nazarov <span class="alt">katılım 1/1</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Ertuğrul Tan Grubu · Pazar · Rincon evi · 12:00–17:00</td></tr>
+<tr><td>Sınıf</td><td>7. sınıf</td></tr>
+<tr><td>Katılım</td><td>1/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Murat Yıldız <span class="alt">katılım 1/1</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Ertuğrul Tan Grubu · Pazar · Rincon evi · 12:00–17:00</td></tr>
+<tr><td>Sınıf</td><td>7. sınıf</td></tr>
+<tr><td>Katılım</td><td>1/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+</div>
+<div class="kart">
+<h3>Hakan Kaplan Grubu <span class="alt">7. sınıf · Hakan Kaplan · Pazar · Heron evi · 12:00–17:00</span></h3>
+<details class="ogr"><summary>Mehmet Uyarer <span class="alt">katılım 1/1</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Hakan Kaplan Grubu · Pazar · Heron evi · 12:00–17:00</td></tr>
+<tr><td>Sınıf</td><td>7. sınıf</td></tr>
+<tr><td>Katılım</td><td>1/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Lokman Keskin <span class="alt">katılım 1/1</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Hakan Kaplan Grubu · Pazar · Heron evi · 12:00–17:00</td></tr>
+<tr><td>Sınıf</td><td>7. sınıf</td></tr>
+<tr><td>Katılım</td><td>1/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Berat Sönmez <span class="alt">katılım 1/1</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Hakan Kaplan Grubu · Pazar · Heron evi · 12:00–17:00</td></tr>
+<tr><td>Sınıf</td><td>7. sınıf</td></tr>
+<tr><td>Katılım</td><td>1/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Fatih Sağır <span class="alt">katılım 0/1 · 1 devamsızlık</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Hakan Kaplan Grubu · Pazar · Heron evi · 12:00–17:00</td></tr>
+<tr><td>Sınıf</td><td>7. sınıf</td></tr>
+<tr><td>Katılım</td><td>0/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>1. Hafta</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Salahaddin Shamil <span class="alt">katılım 1/1</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Hakan Kaplan Grubu · Pazar · Heron evi · 12:00–17:00</td></tr>
+<tr><td>Sınıf</td><td>7. sınıf</td></tr>
+<tr><td>Katılım</td><td>1/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Salih Başar <span class="alt">katılım 1/1</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Hakan Kaplan Grubu · Pazar · Heron evi · 12:00–17:00</td></tr>
+<tr><td>Sınıf</td><td>7. sınıf</td></tr>
+<tr><td>Katılım</td><td>1/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+</div>
+<div class="kart">
+<h3>Hayrettin Yıldırım Grubu <span class="alt">7. sınıf · Hayrettin Yıldırım · Pazar · Adeline evi · 12:00–17:00</span></h3>
+<details class="ogr"><summary>Yunus Özgen <span class="alt">katılım 1/1</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Hayrettin Yıldırım Grubu · Pazar · Adeline evi · 12:00–17:00</td></tr>
+<tr><td>Sınıf</td><td>7. sınıf</td></tr>
+<tr><td>Okul</td><td>Peterson</td></tr>
+<tr><td>Katılım</td><td>1/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Murad Peker <span class="alt">katılım 0/1 · 1 devamsızlık</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Hayrettin Yıldırım Grubu · Pazar · Adeline evi · 12:00–17:00</td></tr>
+<tr><td>Sınıf</td><td>7. sınıf</td></tr>
+<tr><td>Katılım</td><td>0/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>1. Hafta</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>İbrahim Keçicioğlu <span class="alt">katılım 1/1</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Hayrettin Yıldırım Grubu · Pazar · Adeline evi · 12:00–17:00</td></tr>
+<tr><td>Sınıf</td><td>7. sınıf</td></tr>
+<tr><td>Katılım</td><td>1/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Fatih Oruç <span class="alt">katılım 1/1</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Hayrettin Yıldırım Grubu · Pazar · Adeline evi · 12:00–17:00</td></tr>
+<tr><td>Sınıf</td><td>7. sınıf</td></tr>
+<tr><td>Katılım</td><td>1/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Akif Göçeri <span class="alt">katılım 1/1</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Hayrettin Yıldırım Grubu · Pazar · Adeline evi · 12:00–17:00</td></tr>
+<tr><td>Sınıf</td><td>7. sınıf</td></tr>
+<tr><td>Katılım</td><td>1/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Halil Mercan <span class="alt">katılım 1/1</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Hayrettin Yıldırım Grubu · Pazar · Adeline evi · 12:00–17:00</td></tr>
+<tr><td>Sınıf</td><td>7. sınıf</td></tr>
+<tr><td>Katılım</td><td>1/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+</div>
+<div class="kart">
+<h3>Akif Türk Grubu <span class="alt">8. sınıf · Akif Türk · Cuma akşamı · Adeline evi · 17:00–22:00</span></h3>
+<details class="ogr"><summary>Sadık Kaparov <span class="alt">katılım 1/1</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Akif Türk Grubu · Cuma akşamı · Adeline evi · 17:00–22:00</td></tr>
+<tr><td>Sınıf</td><td>8. sınıf</td></tr>
+<tr><td>Katılım</td><td>1/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Hasan Gürel <span class="alt">katılım 1/1</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Akif Türk Grubu · Cuma akşamı · Adeline evi · 17:00–22:00</td></tr>
+<tr><td>Sınıf</td><td>8. sınıf</td></tr>
+<tr><td>Katılım</td><td>1/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Salih Türk <span class="alt">katılım 1/1</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Akif Türk Grubu · Cuma akşamı · Adeline evi · 17:00–22:00</td></tr>
+<tr><td>Sınıf</td><td>8. sınıf</td></tr>
+<tr><td>Katılım</td><td>1/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>yok</td></tr>
+</tbody></table></div>
+</details>
+<details class="ogr"><summary>Mustafa Keskin <span class="alt">katılım 0/1 · 1 devamsızlık</span></summary>
+<div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>Akif Türk Grubu · Cuma akşamı · Adeline evi · 17:00–22:00</td></tr>
+<tr><td>Sınıf</td><td>8. sınıf</td></tr>
+<tr><td>Katılım</td><td>0/1</td></tr>
+<tr><td>Gelmediği haftalar</td><td>1. Hafta</td></tr>
+</tbody></table></div>
+</details>
+</div>
+
+</section>
+</div>
+
+<div class="tab" id="tab-mentorler" hidden>
+<section>
+<h2>Mentorler ve Hedefleri</h2>
+<p class="not">Herkesin kendi seçtiği hedef ve hafta hafta durumu.</p>
+<div class="hafta-kart">
+<h3>Emrullah <span class="alt">Emrullah Grubu · Cumartesi · Heron evi · 10:00–14:00 · 6 öğrenci</span></h3>
+<p class="not">İstişare katılımı: 1/1</p>
+<div class="hedef-kutu"><span class="etiket-k">Hedefleri</span><ol><li>Haftada 5 sayfa Kur'an Arapçası + meali</li></ol></div>
+<div class="tablo-kap"><table class="ist">
+<thead><tr><th>Hafta</th><th>Hedef 1</th><th>Hedef 2</th><th>Not</th></tr></thead>
+<tbody><tr><td>[[2026-h36]]</td><td>yaptı</td><td>—</td><td>—</td></tr></tbody></table></div>
+</div><div class="hafta-kart">
+<h3>Hakan Kuzey <span class="alt">Hakan Kuzey Grubu · Cumartesi · Rincon evi · 10:00–14:00 · 6 öğrenci</span></h3>
+<p class="not">İstişare katılımı: 1/1</p>
+<div class="hedef-kutu"><span class="etiket-k">Hedefleri</span><ol><li>Haftada 50 sayfa kitap</li></ol></div>
+<div class="tablo-kap"><table class="ist">
+<thead><tr><th>Hafta</th><th>Hedef 1</th><th>Hedef 2</th><th>Not</th></tr></thead>
+<tbody><tr><td>[[2026-h36]]</td><td>yapılmadı</td><td>—</td><td>—</td></tr></tbody></table></div>
+</div><div class="hafta-kart">
+<h3>Ertuğrul Tan <span class="alt">Ertuğrul Tan Grubu · Pazar · Rincon evi · 12:00–17:00 · 6 öğrenci</span></h3>
+<p class="not">İstişare katılımı: 1/1</p>
+<div class="hedef-kutu"><span class="etiket-k">Hedefleri</span><ol><li>Kur'an Arapçası + meali — haftada 20 sayfa</li></ol></div>
+<div class="tablo-kap"><table class="ist">
+<thead><tr><th>Hafta</th><th>Hedef 1</th><th>Hedef 2</th><th>Not</th></tr></thead>
+<tbody><tr><td>[[2026-h36]]</td><td>10 sayfa Arapça, 3 sayfa meal</td><td>—</td><td>—</td></tr></tbody></table></div>
+</div><div class="hafta-kart">
+<h3>Hakan Kaplan <span class="alt">Hakan Kaplan Grubu · Pazar · Heron evi · 12:00–17:00 · 6 öğrenci</span></h3>
+<p class="not">İstişare katılımı: 1/1</p>
+<div class="hedef-kutu"><span class="etiket-k">Hedefleri</span><ol><li>Her gün 15 dakika Kur'an meali</li></ol></div>
+<div class="tablo-kap"><table class="ist">
+<thead><tr><th>Hafta</th><th>Hedef 1</th><th>Hedef 2</th><th>Not</th></tr></thead>
+<tbody><tr><td>[[2026-h36]]</td><td>yaptı</td><td>—</td><td>—</td></tr></tbody></table></div>
+</div><div class="hafta-kart">
+<h3>Hayrettin Yıldırım <span class="alt">Hayrettin Yıldırım Grubu · Pazar · Adeline evi · 12:00–17:00 · 6 öğrenci</span></h3>
+<p class="not">İstişare katılımı: 1/1</p>
+<div class="hedef-kutu"><span class="etiket-k">Hedefleri</span><ol><li>Haftada 1 cüz Kur'an Arapçası + yarısı meal</li></ol></div>
+<div class="tablo-kap"><table class="ist">
+<thead><tr><th>Hafta</th><th>Hedef 1</th><th>Hedef 2</th><th>Not</th></tr></thead>
+<tbody><tr><td>[[2026-h36]]</td><td>yaptı</td><td>—</td><td>—</td></tr></tbody></table></div>
+</div><div class="hafta-kart">
+<h3>Akif Türk <span class="alt">Akif Türk Grubu · Cuma akşamı · Adeline evi · 17:00–22:00 · 4 öğrenci</span></h3>
+<p class="not">İstişare katılımı: 1/1</p>
+<div class="hedef-kutu"><span class="etiket-k">Hedefleri</span><ol><li>Her hafta 1 sayfa ezber</li></ol></div>
+<div class="tablo-kap"><table class="ist">
+<thead><tr><th>Hafta</th><th>Hedef 1</th><th>Hedef 2</th><th>Not</th></tr></thead>
+<tbody><tr><td>[[2026-h36]]</td><td>yaptı</td><td>—</td><td>—</td></tr></tbody></table></div>
+</div>
+</section>
+</div>
+
+<div class="tab" id="tab-haftalar" hidden>
+<section>
+<h2>Hafta Hafta</h2>
+<p class="not">Her haftanın müfredat konusu, grupların işlediği sohbet/aktivite ve katılımı.</p>
+<p class='not'>Yoklaması henüz alınmamış hafta: h37</p>
+<div class="hafta-kart">
+<h3>2. Hafta · 7–13 Eylül 2026</h3>
+<p class="not">Müfredat konusu: Teslimiyet müfredatı: yaratılmış olduğunu bilmek · Yaratıcıyı bilmek · Mentorlara sohbet: Teslimiyet müfredatı — yaratılmış olduğunu bilmek · Yaratıcıyı bilmek</p>
+<div class="tablo-kap"><table class="ist">
+<thead><tr><th>Grup</th><th>Sohbet</th><th>Aktivite</th><th>Katılım</th></tr></thead>
+<tbody><tr><td>Emrullah Grubu</td><td>–</td><td>–</td><td>–</td></tr>
+<tr><td>Hakan Kuzey Grubu</td><td>–</td><td>–</td><td>–</td></tr>
+<tr><td>Ertuğrul Tan Grubu</td><td>–</td><td>–</td><td>–</td></tr>
+<tr><td>Hakan Kaplan Grubu</td><td>–</td><td>–</td><td>–</td></tr>
+<tr><td>Hayrettin Yıldırım Grubu</td><td>–</td><td>–</td><td>–</td></tr>
+<tr><td>Akif Türk Grubu</td><td>–</td><td>–</td><td>–</td></tr>
+</tbody></table></div>
+</div>
+<div class="hafta-kart">
+<h3>1. Hafta · 31 Ağustos – 6 Eylül 2026</h3>
+<p class="not">Müfredat konusu: Buraya boşuna gelmedik (açılış) · Mentorlara sohbet: Buraya Boşuna Gelmedik — açılış sohbeti (12-15 dk), ardından program-esaslari gündemi.</p>
+<div class="tablo-kap"><table class="ist">
+<thead><tr><th>Grup</th><th>Sohbet</th><th>Aktivite</th><th>Katılım</th></tr></thead>
+<tbody><tr><td>Emrullah Grubu</td><td>–</td><td>–</td><td>2/4</td></tr>
+<tr><td>Hakan Kuzey Grubu</td><td>–</td><td>–</td><td>4/6</td></tr>
+<tr><td>Ertuğrul Tan Grubu</td><td>–</td><td>–</td><td>6/6</td></tr>
+<tr><td>Hakan Kaplan Grubu</td><td>–</td><td>–</td><td>5/6</td></tr>
+<tr><td>Hayrettin Yıldırım Grubu</td><td>–</td><td>–</td><td>5/6</td></tr>
+<tr><td>Akif Türk Grubu</td><td>–</td><td>–</td><td>3/4</td></tr>
+</tbody></table></div>
+</div>
+
+</section>
+</div>
+
+<div class="tab" id="tab-sohbetler" hidden>
+<section>
+<h2>Sohbetler ve Kaynaklar</h2>
+<p class="not">Haftalık sohbet içerikleri, video ve kaynak linkleri.</p>
+<div class="hafta-kart">
+<h3>Açılış Sunumu — Konuşma Notları <span class="alt">sunum-notu · Kaynak: buraya-bosuna-gelmedik]] sohbetinin sunum eşliği</span></h3>
+
+<p class="not">Verildiği yerler: 1. Hafta · 31 Ağustos – 6 Eylül 2026 — açılış istişaresi.</p>
+</div>
+<div class="hafta-kart">
+<h3>Buraya Boşuna Gelmedik <span class="alt">sohbet · Kaynak: Teslimiyet Yolunda · 23-hp-1, 23-hp-2, 23-hp-6, 23-hp-8, 23-hp-19, 23-hp-27, 23-teb-1</span></h3>
+<p>Amerika'ya gelişimiz kaderledir; evrendeki her şey görevini yaparken bize vaat edilen halifelik görevinin stajı şimdi, burada başlıyor. Süre: 12–15 dakika. Dinleyici: mentorlar (açılış istişaresi).</p>
+<details class="ogr"><summary>İçeriği aç</summary><div class="icerik"><h4>Akış</h4><h4>1. Soru ile aç (1 dk)</h4>
+<p>Amerika'dayız. Buraya sıradan bir hayat yaşamaya mı geldik — okul, iş, ev, sıradan bir Müslümanlık? Yoksa bir sebeple mi buradayız? Cevabı verme, beklet.</p>
+<h4>2. Boşuna değil (2 dk)</h4>
+<blockquote>"Semayı, arzı ve ikisi arasındaki şeyleri boşuna yaratmadık." (Sâd 27)</blockquote>
+<blockquote>"Biz, semaları, arzı ve ikisi arasında bulunanları bir 'oyun ve oyalanma konusu' olsun diye yaratmadık." (Duhân 38)</blockquote>
+<p>Hakikat Planı: "Her şey bir kaderle yaratılmış" ve "Bütün işler kararlaştırılmıştır."</p>
+<h4>3. Bilmedikleri kavram: Afak (3 dk)</h4>
+<blockquote>"Her haberin kararlaştırılmış, gerçekleşeceği bir zaman/mekân vardır." (En'âm 67)</blockquote>
+<blockquote>"Hazinesi bizim yanımızda olmayan hiçbir şey yoktur. Bilinen bir kaderi (planı) olmaksızın onu indirmeyiz." (Hicr 21)</blockquote>
+<p>Kavramı öğret — <strong>Afak: "ufuklar, uzak ülkeler, dünyanın dört bucağı."</strong> Tebliğler: "Ayetlerin tevillerinin uzak olan gelecekteki ülkelerde, dünyanın dört bucağında ve de varlıkların ufukları olan bilinçlerinde gösterileceği bildirilmiştir."</p>
+<blockquote>"Biz ayetlerimizi hem afakta hem kendi nefslerinde onlara göstereceğiz; öyle ki, şüphesiz onun hak olduğu kendilerine açıkça belli olsun." (Fussilet 53)</blockquote>
+<p>O uzak ülke dediği yerde oturuyoruz. Zaman ve mekân kararlaştırılmış; buraya gelişimiz kaderle.</p>
+<h4>4. Evren hizmette — ya biz? (3 dk)</h4>
+<p>Hakikat Planı'nın saat metaforu: "Her şey, muazzam bir tertip içerisinde saat gibi işlemektedir. Saati yaratan O, her şeyi bir plana ve ölçüye göre belirlemiştir. Saati oluşturan parçalar, saatin farkında olsa da olmasa da saate hizmet etmektedirler. Zamanı gelen her parça, plana dâhil olarak görevini en iyi şekilde sürdürmektedir."</p>
+<blockquote>"O, arzda olanların hepsini sizin için yarattı." (Bakara 29)</blockquote>
+<p>Hac 18'deki ince ayrıntı:</p>
+<blockquote>"Görmedin mi ki, gerçekten, semalarda ve arzda olanlar, güneş, ay, yıldızlar, dağlar, ağaçlar, hayvanlar ve insanlardan birçoğu Allah'a secde etmektedirler." (Hac 18)</blockquote>
+<p>Hepsi değil — <strong>birçoğu.</strong> Evrende görevi tartışmalı tek varlık: insan. Parçalar görevini yapıyorsa bizim görevimiz ne?</p>
+<h4>5. Vaat: halifelik — doğru yerinden (3 dk)</h4>
+<p>Öğretinin sınırı: "Yaşanılan zamandaki insan halife değildir; bu göreve ulaşabilmek için imtihandadır. Başarılı olup seçilirse görev verilir." Vaat edilen bir makam değil, görev: "Şu anda arındırılma planında yer alan varlıklara vaat edilen şey, arz planı gibi boyutların, yönetici kadrosu olan halifelik görevidir."</p>
+<blockquote>"Allah, sizden iman edenlere ve salih amel işleyenlere, kendilerinden öncekileri arzda halife kıldığı gibi mutlaka onları da halife kılacağını ve onlara, onlar için razı olduğu dinlerini mutlaka sağlamlaştıracağını ve korkularından sonra mutlaka güvenliğe çevireceğini vaat etti." (Nûr 55)</blockquote>
+<blockquote>"Ey Davut! Muhakkak ki biz, seni arzın halifesi kıldık. Bunun için insanlar arasında hak ile hükmet! Ve hevaya tabi olma." (Sâd 26)</blockquote>
+<p>Ve emanet pasajı: "İlk emanet, Adem (as) yaratıldığı süreçte onun fıtratına kodlanmış halifelik programıdır. Fakat o neslin başarısızlığı sebebiyle emanet insan tarafından tutulamamıştır. Böylece onu taşıyacak olanlar, emanetin kullanımı yerine tekrar o emanete ulaşabilmek için Rahman tarafından arz planlarına indirilmişlerdir."</p>
+<p><strong>Buraya o emanete yeniden ulaşmak için indirildik. Bu yüzden bu çalışmanın adı Emanet</strong> — elimizdeki çocuklar da bize emanet.</p>
+<h4>6. Staj ve tohum (2-3 dk)</h4>
+<p>"Şimdi dikkat edin: demek ki biz bir <strong>halifeliğin stajındayız</strong>. Ve bu güzel görevin stajı ileride bir gün değil, <strong>şu andan başlıyor.</strong> Bu hafta gideceğiniz ev, karşınıza oturacak dört çocuk, hazırlayacağınız sohbet — staj defterinin ilk sayfası bunlar."</p>
+<blockquote>"Mallarını Allah yolunda infak edenlerin örneği yedi başak bitiren, her bir başakta yüz tane bulunan bir tek tanenin örneği gibidir. Allah, dilediğine kat kat arttırır." (Bakara 261)</blockquote>
+<p>Bir taneden yedi yüz tane. Ama çoğalma sayı saymakla olmuyor; kitap ne diyor: "Bitkinin yetişmesi, ürün ve tohum verecek hâle gelmesidir." Önce biz yetişeceğiz ki tohum verebilelim. Elimizdeki beş çocuk birer tohum; biz de tohumuz.</p>
+<h4>7. Kapanış duası → program esasları</h4>
+<p>"Başa dönün — afak neydi? Uzak ülkeler, dünyanın dört bucağı. Ayetler oralarda gösterilecek denmişti; o uzak ülke burası, biz buradayız. <strong>Bu tohumları yetiştirip, ürününü alıp, içinde bulunduğumuz bu afaklarda — bu uzak ülkelerde — Allah'ın nurunu yaymak dileğiyle.</strong> Rabbim stajımızı hakkıyla tamamlamayı nasip etsin."</p>
+<p>Buradan program-esaslari gündemine geçilir.</p><h4>Ayetler ve kaynaklar</h4><p>Sâd 27 · Enbiyâ 16 · Duhân 38 · Duhân 39 · En'âm 67 · Hicr 21 · Fussilet 53 · Rad 15 · Bakara 29 · Nahl 81 · Yâsîn 73 · Hac 18 · Bakara 30 · Nûr 55 · Enbiyâ 105 · Sâd 26 · Bakara 261 · İbrahim 24 — mealler EE'den birebir.</p>
+<p>Öğreti alıntıları: Hakikat Planı Bölüm 1, 2, 6, 8, 19, 27 · Tebliğler Bölüm 1 (Afak).</p></div></details><p class="not">Verildiği yerler: 1. Hafta · 31 Ağustos – 6 Eylül 2026 — mentorlara, açılış istişaresi. ·  · --- · Kaynak: Teslimiyet Yolunda · 23-hp-1, 23-hp-2, 23-hp-6, 23-hp-8, 23-hp-19, 23-hp-27, 23-teb-1</p>
+</div>
+<div class="hafta-kart">
+<h3>Teslimiyet yolunda — ikinci istişare konuşma notları <span class="alt">sohbet · Kaynak: Kur’an ayetleri; Asâ-yı Mûsa, Altıncı Mesele</span></h3>
+<p>Teslimiyet müfredatını birlikte çalışmaya başlamak; yaratılmış olduğunu bilmek ve Yaratıcıyı bilmek üzerinde tefekkür etmek.</p>
+<p>[HTML sunum](../sunumlar/sunum-ikinci-istisare.html) · [Okuma belgesi](../sunumlar/konusmaci-ikinci-istisare.html)</p>
+<details class="ogr"><summary>İçeriği aç</summary><div class="icerik"><h4>Ayetler ve kaynaklar</h4><h4>İnfitar 6–8</h4>
+<blockquote>Ey insan! Kerim olan Rabbine karşı seni aldatan nedir? O ki, seni yarattı, sonra seni dizayn etti, sonra da düzen üzere seni dengeli, sağlıklı kıldı. Dilediği surette seni terkip etti.</blockquote>
+<h4>Nisa 1</h4>
+<blockquote>Ey insanlar, Rabbinize karşı takva sahibi olun. O ki, sizi bir tek nefsten yarattı. Ve ondan zevcesini yarattı ve ikisinden birçok erkekler ve kadınlar üretip yaydı. Ve kendisiyle, birbirinizle dilekleştiğiniz Allah’tan ve akrabalıktan sakının. Şüphesiz Allah, sizin üzerinizde gözeticidir.</blockquote>
+<h4>Hacc 5</h4>
+<blockquote>Ey insanlar! Eğer tekrar diriltilmekten şüphe içinde iseniz... Gerçek şu ki, biz sizi topraktan yarattık, sonra bir damla sudan, sonra bir alak’tan, sonra yaratılış biçimi belli belirsiz bir çiğnem et parçasından; size açıkça göstermek için. Dilediğimizi, adı konulmuş bir süreye kadar rahimlerde tutuyoruz. Sonra sizi bebek olarak çıkarıyoruz, sonra da erginlik çağına erişmeniz için. Sizden kiminizin hayatına son verilmekte, kiminiz de bildikten sonra hiç bir şey bilmeme durumuna gelmesi için ömrün en aşağı ucuna geri çevrilmektedir. Arzı kupkuru ölü gibi görürsün, fakat biz onun üzerine suyu indirdiğimiz zaman titreşir, kabarır ve her güzel çiftten bitirir.</blockquote>
+<h4>Hucurat 13</h4>
+<blockquote>Ey insanlar! Muhakkak ki biz, sizi bir erkek ve bir kadından yarattık. Ve sizi milletler ve kabileler kıldık ki, birbirinizi tanıyasınız. Muhakkak ki Allah’ın indinde en çok kerim olanınız, en çok takva sahibi olanınızdır. Muhakkak ki Allah, en iyi bilen ve haberdar olandır.</blockquote>
+<h4>Enam 77–79 · ayetten</h4>
+<blockquote>Ay’ı doğarken görünce: “Benim Rabbim bu.” dedi. Fakat kaybolunca: “Eğer Rabbim beni hidayete erdirmezse, mutlaka dalâletteki kavimden olurum.” dedi. Güneşi doğarken görünce: “Bu benim Rabbim, bu daha büyük.” dedi. Fakat kaybolup gidince: “Ey kavmim ben sizin ortak koştuğunuz şeylerden uzağım.” dedi. Muhakkak ki ben, hanif olarak yüzümü, yeri ve semaları yaratan Allah’ın zat’ına döndürdüm.</blockquote>
+<h4>Hacc 73</h4>
+<blockquote>Ey insanlar, “size” bir örnek verildi; şimdi onu dinleyin. Sizin, Allah’ın dışında tapmakta olduklarınız -hepsi bunun için bir araya gelseler dahi- gerçekten bir sinek bile yaratamazlar. Eğer sinek onlardan bir şey kapacak olsa, bunu da ondan geri alamazlar. İsteyen de güçsüz, istenen de.</blockquote>
+<h4>Fatır 3</h4>
+<blockquote>Ey insanlar! Allah’ın üzerinizdeki nimetini zikredin. Sizi semalardan ve arzdan rızıklandıran, Allah’tan başka bir Yaratıcı var mı? O’ndan başka İlâh yoktur. Öyleyse nasıl döndürülüyorsunuz?</blockquote>
+<h4>Fatır 15</h4>
+<blockquote>Ey insanlar, siz Allah’a muhtaçsınız; Allah ise, hiçbir şeye ihtiyacı olmayandır, övülmeye layıktır.</blockquote>
+<h4>Bakara 21</h4>
+<blockquote>Ey insanlar! Rabbinize kul olun ki O, sizi ve sizden öncekileri yarattı. Umulur ki böylece siz, takva sahibi olursunuz.</blockquote>
+<h4>Asr 1–3</h4>
+<blockquote>Asra yemin olsun. Muhakkak ki insan, gerçekten hüsrandadır. Ancak iman edip salih amellerde bulunanlar, birbirlerine hakkı tavsiye edenler ve birbirlerine sabrı tavsiye edenler başka.</blockquote>
+<h4>Âl-i İmran 102</h4>
+<blockquote>Ey iman edenler! Allah’a karşı “O’nun hak takvası” ile takva sahibi olun! Ve sakın siz, teslim olmadan ölmeyin!</blockquote>
+<h4>Yusuf 101</h4>
+<blockquote>Rabbim bana mülk verdin. Ve olayların tevilini bana öğrettin. Semaları ve yeryüzünü yaratan, Sen benim dünyada ve ahirette velimsin. Beni Müslüman olarak vefat ettir ve beni salihler arasına kat.</blockquote>
+<h4>Secde 4</h4>
+<blockquote>Allah’tır ki semaları, arzı ve ikisi arasındakileri altı günde yaratmış, sonra arş üzerinde egemenlik kurmuştur. O’nun dışındakilerden size ne bir dost vardır ne de bir şefaatçi. Hâlâ düşünüp ibret almayacak mısınız?</blockquote>
+<h4>Ahzab 35</h4>
+<blockquote>Gerçekten teslim olan erkekler ve teslim olan kadınlar ve mümin erkekler ve mümin kadınlar, kanitin olan erkekler ve kanitin olan kadınlar, sadık erkekler ve sadık kadınlar, sabreden erkekler ve sabreden kadınlar, huşu duyan erkekler ve huşu duyan kadınlar, sadaka veren erkekler ve sadaka veren kadınlar, oruç tutan erkekler ve oruç tutan kadınlar, ırzlarını koruyan erkekler ve ırzlarını koruyan kadınlar, Allah’ı çok zikreden erkekler ve zikreden kadınlar! Allah, onlar için mağfiret ve azim bir ecir hazırladı.</blockquote>
+<h4>Tevbe 112</h4>
+<blockquote>Tövbe eden, kul olan, hamdeden, seyahat eden, rükû edenler, secde edenler, iyiliği emredip kötülükten sakındıranlar ve Allah’ın hudutlarını muhafaza edenler; sen müminleri müjdele.</blockquote>
+<h4>Şura 36–39</h4>
+<blockquote>Size verilen herhangi bir şey, dünya hayatının metasıdır. Allah’ın indinde olan ise, daha hayırlı ve daha bâkîdir. (Bu da) İman edenler ve Rablerine tevekkül edenler içindir. Ve onlar ismin kebirlerinden ve fevâhişten ictinab edenler ve gazablandıkları zaman mağfiret edenlerdir. Ve Rablerine isticab edenler ve salatı ikame edenler ve emirleri aralarında şura ile olanlar ve kendilerine rızık olarak verdiklerimizden infak edenlerdir. Ve kendilerine bir beğy isabet ettiği zaman intisar edenlerdir.</blockquote>
+<h4>Tahrim 8 · ayetten</h4>
+<blockquote>O gün Allah, nebileri ve onunla beraber olanları mahzun etmez. Onların nurları, önlerinde ve sağlarında koşar. “Rabbimiz, bizim nurumuzu tamamla ve bize mağfiret et.”</blockquote>
+<h4>Hicr 47</h4>
+<blockquote>Onların göğüslerinde kinden ne varsa çekip çıkardık. Onlar, kardeş olarak karşılıklı tahtlar üzerindedirler</blockquote>
+<h4>Âl-i İmran 77 · ayetten</h4>
+<blockquote>Kıyamet gününde Allah onlarla konuşmaz ve onları gözetmez. Ve onları arındırmaz.</blockquote>
+<h4>Bakara 174</h4>
+<blockquote>Allah’ın indirdiği Kitap’tan bir şeyi göz ardı edip saklayanlar ve onunla değeri az “bir şeyi” satın alanlar; onların yedikleri, karınlarında ateşten başkası değildir. Allah kıyamet günü onlarla konuşmaz ve onları arındırmaz. Ve onlar için acı bir azap vardır.</blockquote>
+<h4>Hucurat 14 · ayetten</h4>
+<blockquote>Araplar iman ettik dediler de ki: siz henüz iman etmediniz ve lâkin henüz iman kalplerinizin içine girmemiş olduğu hâlde teslimiyete girdik deyin.</blockquote>
+<h4>Kasas 52–53</h4>
+<blockquote>Ondan önce kendilerine Kitap verdiklerimiz, ona iman ederler. Ve onlara “Kur’an” okunduğu zaman: “ona iman ettik, muhakkak ki o, Rabbimizden haktır. Biz, ondan önce de muhakkak ki Müslümanlardandık/Teslim olanlardık.</blockquote>
+<h4>Âl-i İmran 35–37</h4>
+<blockquote>Hani İmran’ın karısı: “Rabbim, karnımda olanı, ‘her türlü bağımlılıktan özgürlüğe kavuşturulmuş olarak’ Sana adadım, benden kabul et. Muhakkak ki Sen Semi’sin, Âlim’sin” demişti. Fakat onu doğurduğunda -Allah onun ne doğurduğunu daha iyi bilirken- dedi ki: “Rabbim, doğrusu bir kız doğurdum. Erkek ise, kız gibi değildir. Ona Meryem adını koydum. Ben onu ve soyunu o taşa tutulmuş şeytandan sana sığındırırım. Bunun üzerine Rabbi onu güzel bir kabulle kabul etti ve onu güzel bir bitki gibi yetiştirdi. Zekeriya’yı ondan sorumlu kıldı. Zekeriya her ne zaman mihraba girdiyse, yanında bir yiyecek bulurdu; Meryem, bu sana nasıl, nereden (geldi)?” deyince, o da: “O, Allah’ın katından” diyordu. Muhakkak ki Allah, dilediği kimseyi hesapsız rızıklandırır.</blockquote>
+<h4>Âl-i İmran 42</h4>
+<blockquote>Hani melekler: “Meryem, şüphesiz Allah seni seçti, seni arındırdı ve âlemlerin kadınlarına üstün kıldı.</blockquote>
+<h4>Bakara 168</h4>
+<blockquote>Ey insanlar! Arzdaki helâl ve temiz şeylerden yiyin. Ve şeytanın adımlarına tabi olmayın. Muhakkak ki o, sizin için apaçık bir düşmandır.</blockquote>
+<h4>Nisa 170</h4>
+<blockquote>Ey insanlar, şüphesiz resul size Rabbinizden hakla geldi. Öyleyse iman edin, sizin için hayırlıdır. Eğer inkâra saparsanız, şüphesiz semalarda olanların ve arzda olanların tümü Allah’ındır. Allah bilendir, hüküm ve hikmet sahibidir.</blockquote>
+<h4>Sâd 27 · ayetten</h4>
+<blockquote>Semayı, arzı ve ikisi arasındaki şeyleri boşuna yaratmadık.</blockquote>
+<h4>Bakara 30 · ayetten</h4>
+<blockquote>Rabbin meleklere: “Muhakkak ki ben arzda bir halife kılacağım” demişti.</blockquote>
+<h4>Nûr 55 · ayetten</h4>
+<blockquote>Allah, sizden iman edenlere ve salih amel işleyenlere, kendilerinden öncekileri arzda halife kıldığı gibi mutlaka onları da halife kılacağını ve onlara, onlar için razı olduğu dinlerini mutlaka sağlamlaştıracağını ve korkularından sonra mutlaka güvenliğe çevireceğini vaat etti. Bana kul olurlar, hiçbir şeyle şirk koşmazlar.</blockquote>
+<h4>Hadid 12</h4>
+<blockquote>O gün, mümin erkekleri ve mümin kadınları, nurları önlerinde ve sağlarında koşarken görürsün “Bugün sizin müjdeniz, içinde ebedi kalıcılar “olduğunuz”, altından ırmaklar akan cennetlerdir. İşte ‘büyük kurtuluş ve mutluluk’ budur.</blockquote>
+<p>Asâ-yı Mûsa bölümü: [Hizmet Vakfı — Altıncı Mesele](https://risaleinur.hizmetvakfi.org/altinci-mesele/)</p></div></details><p class="not">Verildiği yerler: Henüz işlenmedi.</p>
+</div>
+
+</section>
+</div>
+
+<footer>Bu sayfa Emanet vault'undan üretilir ve dönem boyunca birikir. İletişim bilgileri, aile kayıtları, mentor gözlem raporları ve kişisel notlar bilerek yer almaz.</footer>
+</div>
+<script>
+(function () {
+  var btns = document.querySelectorAll('.sekmeler button');
+  function ac(ad) {
+    btns.forEach(function (b) { b.classList.toggle('aktif', b.dataset.tab === ad); });
+    document.querySelectorAll('.tab').forEach(function (t) { t.hidden = (t.id !== 'tab-' + ad); });
+    if (history.replaceState) history.replaceState(null, '', '#' + ad);
+  }
+  btns.forEach(function (b) { b.addEventListener('click', function () { ac(b.dataset.tab); }); });
+  var h = location.hash.replace('#', '');
+  if (h && document.getElementById('tab-' + h)) ac(h);
+})();
+</script>
