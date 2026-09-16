@@ -111,6 +111,9 @@ table.matris thead th:first-child { background: var(--chip-bg); }
 table.matris thead th { background: var(--chip-bg); }
 table.matris tfoot td { font-weight: 600; border-top: 2px solid var(--line); }
 #s-ad, #s-oran { cursor: pointer; }
+a.kisi { color: inherit; text-decoration: underline dotted; text-underline-offset: 3px; }
+a.kisi:hover { color: var(--accent); }
+details.ogr:target, details.ogr[open]:target { outline: 2px solid var(--accent); }
 .sum { font-weight: 600; }
 .ok { color: var(--ok); font-weight: 700; }
 .no { color: var(--no); font-weight: 700; }
@@ -201,6 +204,7 @@ blockquote {
 <button type="button" data-tab="yoklama">Yoklama</button>
 <button type="button" data-tab="ogrenciler">Öğrenciler</button>
 <button type="button" data-tab="mentorler">Mentorler</button>
+
 <button type="button" data-tab="haftalar">Haftalar</button>
 <button type="button" data-tab="sohbetler">Sohbetler</button>
 </nav>
@@ -250,6 +254,7 @@ blockquote {
 <div><h3>Teması gecikenler (21 gün+)</h3><ul><li>Taha İstek — hiç temas yok</li><li>Mustafa Keskin — hiç temas yok</li><li>Murad Peker — hiç temas yok</li><li>Mete Kaygısız — hiç temas yok</li><li>Levent Balaban — hiç temas yok</li><li>Fatih Sağır — hiç temas yok</li><li>Fatih Aygar — hiç temas yok</li><li>Ali Öztürk — hiç temas yok</li><li>Ahmet Öztürk — hiç temas yok</li></ul></div>
 <div><h3>Eksik veriler</h3><ul><li>34 öğrencinin doğum günü boş</li><li>34 öğrencinin tanıma bilgisi boş</li></ul></div>
 </div>
+
 </section>
 </div>
 
@@ -267,40 +272,40 @@ blockquote {
 </div>
 <div class="tablo-kap"><table class="matris" id="matris">
 <thead><tr><th id="s-ad">İsim ⇅</th><th>Sınıf</th><th>Rehber</th><th>4–6 Eyl</th><th>11–13 Eyl</th><th id="s-oran">Toplam ⇅</th></tr></thead>
-<tbody><tr data-ad="erkan aslan" data-sinif="6" data-rehber="Emrullah" data-dev="0" data-oran="100"><td>Erkan Aslan</td><td>6</td><td>Emrullah</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
-<tr data-ad="ahmet musa" data-sinif="6" data-rehber="Emrullah" data-dev="0" data-oran="100"><td>Ahmet Musa</td><td>6</td><td>Emrullah</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
-<tr data-ad="taha i̇stek" data-sinif="6" data-rehber="Emrullah" data-dev="1" data-oran="0"><td>Taha İstek</td><td>6</td><td>Emrullah</td><td class="cna">–</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
-<tr data-ad="fatih aygar" data-sinif="6" data-rehber="Emrullah" data-dev="1" data-oran="0"><td>Fatih Aygar</td><td>6</td><td>Emrullah</td><td class="cna">–</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
-<tr data-ad="ahmet öztürk" data-sinif="6" data-rehber="Emrullah" data-dev="1" data-oran="0"><td>Ahmet Öztürk</td><td>6</td><td>Emrullah</td><td class="cna">–</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
-<tr data-ad="ali öztürk" data-sinif="6" data-rehber="Emrullah" data-dev="1" data-oran="0"><td>Ali Öztürk</td><td>6</td><td>Emrullah</td><td class="cna">–</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
-<tr data-ad="levent balaban" data-sinif="6" data-rehber="Hakan Kuzey" data-dev="1" data-oran="0"><td>Levent Balaban</td><td>6</td><td>Hakan Kuzey</td><td class="cna">–</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
-<tr data-ad="taha çetindil" data-sinif="6" data-rehber="Hakan Kuzey" data-dev="0" data-oran="100"><td>Taha Çetindil</td><td>6</td><td>Hakan Kuzey</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
-<tr data-ad="hayreddin tiryaki" data-sinif="6" data-rehber="Hakan Kuzey" data-dev="0" data-oran="100"><td>Hayreddin Tiryaki</td><td>6</td><td>Hakan Kuzey</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
-<tr data-ad="yusuf pala" data-sinif="6" data-rehber="Hakan Kuzey" data-dev="0" data-oran="100"><td>Yusuf Pala</td><td>6</td><td>Hakan Kuzey</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
-<tr data-ad="mete kaygısız" data-sinif="6" data-rehber="Hakan Kuzey" data-dev="1" data-oran="0"><td>Mete Kaygısız</td><td>6</td><td>Hakan Kuzey</td><td class="cna">–</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
-<tr data-ad="metin yıldız" data-sinif="6" data-rehber="Hakan Kuzey" data-dev="0" data-oran="100"><td>Metin Yıldız</td><td>6</td><td>Hakan Kuzey</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
-<tr data-ad="numan pamuk" data-sinif="7" data-rehber="Ertuğrul Tan" data-dev="0" data-oran="100"><td>Numan Pamuk</td><td>7</td><td>Ertuğrul Tan</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
-<tr data-ad="ahmet öztürk" data-sinif="7" data-rehber="Ertuğrul Tan" data-dev="0" data-oran="100"><td>Ahmet Öztürk</td><td>7</td><td>Ertuğrul Tan</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
-<tr data-ad="selim keskin" data-sinif="7" data-rehber="Ertuğrul Tan" data-dev="0" data-oran="100"><td>Selim Keskin</td><td>7</td><td>Ertuğrul Tan</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
-<tr data-ad="orhan ark" data-sinif="7" data-rehber="Ertuğrul Tan" data-dev="0" data-oran="100"><td>Orhan Ark</td><td>7</td><td>Ertuğrul Tan</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
-<tr data-ad="hüseyin nazarov" data-sinif="7" data-rehber="Ertuğrul Tan" data-dev="0" data-oran="100"><td>Hüseyin Nazarov</td><td>7</td><td>Ertuğrul Tan</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
-<tr data-ad="murat yıldız" data-sinif="7" data-rehber="Ertuğrul Tan" data-dev="0" data-oran="100"><td>Murat Yıldız</td><td>7</td><td>Ertuğrul Tan</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
-<tr data-ad="mehmet uyarer" data-sinif="7" data-rehber="Hakan Kaplan" data-dev="0" data-oran="100"><td>Mehmet Uyarer</td><td>7</td><td>Hakan Kaplan</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
-<tr data-ad="lokman keskin" data-sinif="7" data-rehber="Hakan Kaplan" data-dev="0" data-oran="100"><td>Lokman Keskin</td><td>7</td><td>Hakan Kaplan</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
-<tr data-ad="berat sönmez" data-sinif="7" data-rehber="Hakan Kaplan" data-dev="0" data-oran="100"><td>Berat Sönmez</td><td>7</td><td>Hakan Kaplan</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
-<tr data-ad="fatih sağır" data-sinif="7" data-rehber="Hakan Kaplan" data-dev="1" data-oran="0"><td>Fatih Sağır</td><td>7</td><td>Hakan Kaplan</td><td class="cna">–</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
-<tr data-ad="salahaddin shamil" data-sinif="7" data-rehber="Hakan Kaplan" data-dev="0" data-oran="100"><td>Salahaddin Shamil</td><td>7</td><td>Hakan Kaplan</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
-<tr data-ad="salih başar" data-sinif="7" data-rehber="Hakan Kaplan" data-dev="0" data-oran="100"><td>Salih Başar</td><td>7</td><td>Hakan Kaplan</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
-<tr data-ad="yunus özgen" data-sinif="7" data-rehber="Hayrettin Yıldırım" data-dev="0" data-oran="100"><td>Yunus Özgen</td><td>7</td><td>Hayrettin Yıldırım</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
-<tr data-ad="murad peker" data-sinif="7" data-rehber="Hayrettin Yıldırım" data-dev="1" data-oran="0"><td>Murad Peker</td><td>7</td><td>Hayrettin Yıldırım</td><td class="cna">–</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
-<tr data-ad="i̇brahim keçicioğlu" data-sinif="7" data-rehber="Hayrettin Yıldırım" data-dev="0" data-oran="100"><td>İbrahim Keçicioğlu</td><td>7</td><td>Hayrettin Yıldırım</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
-<tr data-ad="fatih oruç" data-sinif="7" data-rehber="Hayrettin Yıldırım" data-dev="0" data-oran="100"><td>Fatih Oruç</td><td>7</td><td>Hayrettin Yıldırım</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
-<tr data-ad="akif göçeri" data-sinif="7" data-rehber="Hayrettin Yıldırım" data-dev="0" data-oran="100"><td>Akif Göçeri</td><td>7</td><td>Hayrettin Yıldırım</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
-<tr data-ad="halil mercan" data-sinif="7" data-rehber="Hayrettin Yıldırım" data-dev="0" data-oran="100"><td>Halil Mercan</td><td>7</td><td>Hayrettin Yıldırım</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
-<tr data-ad="sadık kaparov" data-sinif="8" data-rehber="Akif Türk" data-dev="0" data-oran="100"><td>Sadık Kaparov</td><td>8</td><td>Akif Türk</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
-<tr data-ad="hasan gürel" data-sinif="8" data-rehber="Akif Türk" data-dev="0" data-oran="100"><td>Hasan Gürel</td><td>8</td><td>Akif Türk</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
-<tr data-ad="salih türk" data-sinif="8" data-rehber="Akif Türk" data-dev="0" data-oran="100"><td>Salih Türk</td><td>8</td><td>Akif Türk</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
-<tr data-ad="mustafa keskin" data-sinif="8" data-rehber="Akif Türk" data-dev="1" data-oran="0"><td>Mustafa Keskin</td><td>8</td><td>Akif Türk</td><td class="cna">–</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
+<tbody><tr data-ad="erkan aslan" data-sinif="6" data-rehber="Emrullah" data-dev="0" data-oran="100"><td><a class="kisi" href="#ogr-erkan-aslan">Erkan Aslan</a></td><td>6</td><td>Emrullah</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="ahmet musa" data-sinif="6" data-rehber="Emrullah" data-dev="0" data-oran="100"><td><a class="kisi" href="#ogr-ahmet-musa">Ahmet Musa</a></td><td>6</td><td>Emrullah</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="taha i̇stek" data-sinif="6" data-rehber="Emrullah" data-dev="1" data-oran="0"><td><a class="kisi" href="#ogr-taha-istek">Taha İstek</a></td><td>6</td><td>Emrullah</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
+<tr data-ad="fatih aygar" data-sinif="6" data-rehber="Emrullah" data-dev="1" data-oran="0"><td><a class="kisi" href="#ogr-fatih-aygar">Fatih Aygar</a></td><td>6</td><td>Emrullah</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
+<tr data-ad="ahmet öztürk" data-sinif="6" data-rehber="Emrullah" data-dev="1" data-oran="0"><td><a class="kisi" href="#ogr-ahmet-ozturk-6">Ahmet Öztürk</a></td><td>6</td><td>Emrullah</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
+<tr data-ad="ali öztürk" data-sinif="6" data-rehber="Emrullah" data-dev="1" data-oran="0"><td><a class="kisi" href="#ogr-ali-ozturk">Ali Öztürk</a></td><td>6</td><td>Emrullah</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
+<tr data-ad="levent balaban" data-sinif="6" data-rehber="Hakan Kuzey" data-dev="1" data-oran="0"><td><a class="kisi" href="#ogr-levent-balaban">Levent Balaban</a></td><td>6</td><td>Hakan Kuzey</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
+<tr data-ad="taha çetindil" data-sinif="6" data-rehber="Hakan Kuzey" data-dev="0" data-oran="100"><td><a class="kisi" href="#ogr-taha-cetindil">Taha Çetindil</a></td><td>6</td><td>Hakan Kuzey</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="hayreddin tiryaki" data-sinif="6" data-rehber="Hakan Kuzey" data-dev="0" data-oran="100"><td><a class="kisi" href="#ogr-hayreddin-tiryaki">Hayreddin Tiryaki</a></td><td>6</td><td>Hakan Kuzey</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="yusuf pala" data-sinif="6" data-rehber="Hakan Kuzey" data-dev="0" data-oran="100"><td><a class="kisi" href="#ogr-yusuf-pala">Yusuf Pala</a></td><td>6</td><td>Hakan Kuzey</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="mete kaygısız" data-sinif="6" data-rehber="Hakan Kuzey" data-dev="1" data-oran="0"><td><a class="kisi" href="#ogr-mete-kaygisiz">Mete Kaygısız</a></td><td>6</td><td>Hakan Kuzey</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
+<tr data-ad="metin yıldız" data-sinif="6" data-rehber="Hakan Kuzey" data-dev="0" data-oran="100"><td><a class="kisi" href="#ogr-metin-yildiz">Metin Yıldız</a></td><td>6</td><td>Hakan Kuzey</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="numan pamuk" data-sinif="7" data-rehber="Ertuğrul Tan" data-dev="0" data-oran="100"><td><a class="kisi" href="#ogr-numan-pamuk">Numan Pamuk</a></td><td>7</td><td>Ertuğrul Tan</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="ahmet öztürk" data-sinif="7" data-rehber="Ertuğrul Tan" data-dev="0" data-oran="100"><td><a class="kisi" href="#ogr-ahmet-ozturk">Ahmet Öztürk</a></td><td>7</td><td>Ertuğrul Tan</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="selim keskin" data-sinif="7" data-rehber="Ertuğrul Tan" data-dev="0" data-oran="100"><td><a class="kisi" href="#ogr-selim-keskin">Selim Keskin</a></td><td>7</td><td>Ertuğrul Tan</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="orhan ark" data-sinif="7" data-rehber="Ertuğrul Tan" data-dev="0" data-oran="100"><td><a class="kisi" href="#ogr-orhan-ark">Orhan Ark</a></td><td>7</td><td>Ertuğrul Tan</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="hüseyin nazarov" data-sinif="7" data-rehber="Ertuğrul Tan" data-dev="0" data-oran="100"><td><a class="kisi" href="#ogr-huseyin-nazarov">Hüseyin Nazarov</a></td><td>7</td><td>Ertuğrul Tan</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="murat yıldız" data-sinif="7" data-rehber="Ertuğrul Tan" data-dev="0" data-oran="100"><td><a class="kisi" href="#ogr-murat-yildiz">Murat Yıldız</a></td><td>7</td><td>Ertuğrul Tan</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="mehmet uyarer" data-sinif="7" data-rehber="Hakan Kaplan" data-dev="0" data-oran="100"><td><a class="kisi" href="#ogr-mehmet-uyarer">Mehmet Uyarer</a></td><td>7</td><td>Hakan Kaplan</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="lokman keskin" data-sinif="7" data-rehber="Hakan Kaplan" data-dev="0" data-oran="100"><td><a class="kisi" href="#ogr-lokman-keskin">Lokman Keskin</a></td><td>7</td><td>Hakan Kaplan</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="berat sönmez" data-sinif="7" data-rehber="Hakan Kaplan" data-dev="0" data-oran="100"><td><a class="kisi" href="#ogr-berat-sonmez">Berat Sönmez</a></td><td>7</td><td>Hakan Kaplan</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="fatih sağır" data-sinif="7" data-rehber="Hakan Kaplan" data-dev="1" data-oran="0"><td><a class="kisi" href="#ogr-fatih-sagir">Fatih Sağır</a></td><td>7</td><td>Hakan Kaplan</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
+<tr data-ad="salahaddin shamil" data-sinif="7" data-rehber="Hakan Kaplan" data-dev="0" data-oran="100"><td><a class="kisi" href="#ogr-salahaddin-shamil">Salahaddin Shamil</a></td><td>7</td><td>Hakan Kaplan</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="salih başar" data-sinif="7" data-rehber="Hakan Kaplan" data-dev="0" data-oran="100"><td><a class="kisi" href="#ogr-salih-basar">Salih Başar</a></td><td>7</td><td>Hakan Kaplan</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="yunus özgen" data-sinif="7" data-rehber="Hayrettin Yıldırım" data-dev="0" data-oran="100"><td><a class="kisi" href="#ogr-yunus-ozgen">Yunus Özgen</a></td><td>7</td><td>Hayrettin Yıldırım</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="murad peker" data-sinif="7" data-rehber="Hayrettin Yıldırım" data-dev="1" data-oran="0"><td><a class="kisi" href="#ogr-murad-peker">Murad Peker</a></td><td>7</td><td>Hayrettin Yıldırım</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
+<tr data-ad="i̇brahim keçicioğlu" data-sinif="7" data-rehber="Hayrettin Yıldırım" data-dev="0" data-oran="100"><td><a class="kisi" href="#ogr-ibrahim-kecicioglu">İbrahim Keçicioğlu</a></td><td>7</td><td>Hayrettin Yıldırım</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="fatih oruç" data-sinif="7" data-rehber="Hayrettin Yıldırım" data-dev="0" data-oran="100"><td><a class="kisi" href="#ogr-fatih-oruc">Fatih Oruç</a></td><td>7</td><td>Hayrettin Yıldırım</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="akif göçeri" data-sinif="7" data-rehber="Hayrettin Yıldırım" data-dev="0" data-oran="100"><td><a class="kisi" href="#ogr-akif-goceri">Akif Göçeri</a></td><td>7</td><td>Hayrettin Yıldırım</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="halil mercan" data-sinif="7" data-rehber="Hayrettin Yıldırım" data-dev="0" data-oran="100"><td><a class="kisi" href="#ogr-halil-mercan">Halil Mercan</a></td><td>7</td><td>Hayrettin Yıldırım</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="sadık kaparov" data-sinif="8" data-rehber="Akif Türk" data-dev="0" data-oran="100"><td><a class="kisi" href="#ogr-sadik-kaparov">Sadık Kaparov</a></td><td>8</td><td>Akif Türk</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="hasan gürel" data-sinif="8" data-rehber="Akif Türk" data-dev="0" data-oran="100"><td><a class="kisi" href="#ogr-hasan-gurel">Hasan Gürel</a></td><td>8</td><td>Akif Türk</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="salih türk" data-sinif="8" data-rehber="Akif Türk" data-dev="0" data-oran="100"><td><a class="kisi" href="#ogr-salih-turk">Salih Türk</a></td><td>8</td><td>Akif Türk</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
+<tr data-ad="mustafa keskin" data-sinif="8" data-rehber="Akif Türk" data-dev="1" data-oran="0"><td><a class="kisi" href="#ogr-mustafa-keskin">Mustafa Keskin</a></td><td>8</td><td>Akif Türk</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
 </tbody>
 <tfoot><tr><td colspan="3">Haftalık katılım</td><td></td><td></td><td></td></tr></tfoot>
 </table></div>
@@ -390,42 +395,42 @@ blockquote {
 <p class="not">Öğrenciye tıkla: grup, katılım ve devamsızlık bilgisi. Veli/iletişim bilgileri yalnız özel paneldedir.</p>
 <div class="kart">
 <h3>6-A Grubu <span class="alt">6. sınıf · Emrullah · Cumartesi · Heron evi · 10:00–14:00</span></h3>
-<details class="ogr"><summary>Erkan Aslan <span class="alt">katılım 1/1</span></summary>
+<details class="ogr" id="ogr-erkan-aslan"><summary>Erkan Aslan <span class="alt">katılım 1/1</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>6-A Grubu · Cumartesi · Heron evi · 10:00–14:00</td></tr>
 <tr><td>Sınıf</td><td>6. sınıf</td></tr>
 <tr><td>Katılım</td><td>1/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>yok</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Ahmet Musa <span class="alt">katılım 1/1</span></summary>
+<details class="ogr" id="ogr-ahmet-musa"><summary>Ahmet Musa <span class="alt">katılım 1/1</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>6-A Grubu · Cumartesi · Heron evi · 10:00–14:00</td></tr>
 <tr><td>Sınıf</td><td>6. sınıf</td></tr>
 <tr><td>Katılım</td><td>1/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>yok</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Taha İstek <span class="alt">katılım 0/1 · 1 devamsızlık</span></summary>
+<details class="ogr" id="ogr-taha-istek"><summary>Taha İstek <span class="alt">katılım 0/1 · 1 devamsızlık</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>6-A Grubu · Cumartesi · Heron evi · 10:00–14:00</td></tr>
 <tr><td>Sınıf</td><td>6. sınıf</td></tr>
 <tr><td>Katılım</td><td>0/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>1. Hafta</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Fatih Aygar <span class="alt">katılım 0/1 · 1 devamsızlık</span></summary>
+<details class="ogr" id="ogr-fatih-aygar"><summary>Fatih Aygar <span class="alt">katılım 0/1 · 1 devamsızlık</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>6-A Grubu · Cumartesi · Heron evi · 10:00–14:00</td></tr>
 <tr><td>Sınıf</td><td>6. sınıf</td></tr>
 <tr><td>Katılım</td><td>0/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>1. Hafta</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Ahmet Öztürk <span class="alt">katılım 0/1 · 1 devamsızlık</span></summary>
+<details class="ogr" id="ogr-ahmet-ozturk-6"><summary>Ahmet Öztürk <span class="alt">katılım 0/1 · 1 devamsızlık</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>6-A Grubu · Cumartesi · Heron evi · 10:00–14:00</td></tr>
 <tr><td>Sınıf</td><td>6. sınıf</td></tr>
 <tr><td>Katılım</td><td>0/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>1. Hafta</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Ali Öztürk <span class="alt">katılım 0/1 · 1 devamsızlık</span></summary>
+<details class="ogr" id="ogr-ali-ozturk"><summary>Ali Öztürk <span class="alt">katılım 0/1 · 1 devamsızlık</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>6-A Grubu · Cumartesi · Heron evi · 10:00–14:00</td></tr>
 <tr><td>Sınıf</td><td>6. sınıf</td></tr>
 <tr><td>Katılım</td><td>0/1</td></tr>
@@ -435,42 +440,42 @@ blockquote {
 </div>
 <div class="kart">
 <h3>6-B Grubu <span class="alt">6. sınıf · Hakan Kuzey · Cumartesi · Rincon evi · 10:00–14:00</span></h3>
-<details class="ogr"><summary>Levent Balaban <span class="alt">katılım 0/1 · 1 devamsızlık</span></summary>
+<details class="ogr" id="ogr-levent-balaban"><summary>Levent Balaban <span class="alt">katılım 0/1 · 1 devamsızlık</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>6-B Grubu · Cumartesi · Rincon evi · 10:00–14:00</td></tr>
 <tr><td>Sınıf</td><td>6. sınıf</td></tr>
 <tr><td>Katılım</td><td>0/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>1. Hafta</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Taha Çetindil <span class="alt">katılım 1/1</span></summary>
+<details class="ogr" id="ogr-taha-cetindil"><summary>Taha Çetindil <span class="alt">katılım 1/1</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>6-B Grubu · Cumartesi · Rincon evi · 10:00–14:00</td></tr>
 <tr><td>Sınıf</td><td>6. sınıf</td></tr>
 <tr><td>Katılım</td><td>1/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>yok</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Hayreddin Tiryaki <span class="alt">katılım 1/1</span></summary>
+<details class="ogr" id="ogr-hayreddin-tiryaki"><summary>Hayreddin Tiryaki <span class="alt">katılım 1/1</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>6-B Grubu · Cumartesi · Rincon evi · 10:00–14:00</td></tr>
 <tr><td>Sınıf</td><td>6. sınıf</td></tr>
 <tr><td>Katılım</td><td>1/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>yok</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Yusuf Pala <span class="alt">katılım 1/1</span></summary>
+<details class="ogr" id="ogr-yusuf-pala"><summary>Yusuf Pala <span class="alt">katılım 1/1</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>6-B Grubu · Cumartesi · Rincon evi · 10:00–14:00</td></tr>
 <tr><td>Sınıf</td><td>6. sınıf</td></tr>
 <tr><td>Katılım</td><td>1/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>yok</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Mete Kaygısız <span class="alt">katılım 0/1 · 1 devamsızlık</span></summary>
+<details class="ogr" id="ogr-mete-kaygisiz"><summary>Mete Kaygısız <span class="alt">katılım 0/1 · 1 devamsızlık</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>6-B Grubu · Cumartesi · Rincon evi · 10:00–14:00</td></tr>
 <tr><td>Sınıf</td><td>6. sınıf</td></tr>
 <tr><td>Katılım</td><td>0/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>1. Hafta</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Metin Yıldız <span class="alt">katılım 1/1</span></summary>
+<details class="ogr" id="ogr-metin-yildiz"><summary>Metin Yıldız <span class="alt">katılım 1/1</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>6-B Grubu · Cumartesi · Rincon evi · 10:00–14:00</td></tr>
 <tr><td>Sınıf</td><td>6. sınıf</td></tr>
 <tr><td>Katılım</td><td>1/1</td></tr>
@@ -480,42 +485,42 @@ blockquote {
 </div>
 <div class="kart">
 <h3>7-A Grubu <span class="alt">7. sınıf · Ertuğrul Tan · Pazar · Rincon evi · 12:00–17:00</span></h3>
-<details class="ogr"><summary>Numan Pamuk <span class="alt">katılım 1/1</span></summary>
+<details class="ogr" id="ogr-numan-pamuk"><summary>Numan Pamuk <span class="alt">katılım 1/1</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>7-A Grubu · Pazar · Rincon evi · 12:00–17:00</td></tr>
 <tr><td>Sınıf</td><td>7. sınıf</td></tr>
 <tr><td>Katılım</td><td>1/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>yok</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Ahmet Öztürk <span class="alt">katılım 1/1</span></summary>
+<details class="ogr" id="ogr-ahmet-ozturk"><summary>Ahmet Öztürk <span class="alt">katılım 1/1</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>7-A Grubu · Pazar · Rincon evi · 12:00–17:00</td></tr>
 <tr><td>Sınıf</td><td>7. sınıf</td></tr>
 <tr><td>Katılım</td><td>1/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>yok</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Selim Keskin <span class="alt">katılım 1/1</span></summary>
+<details class="ogr" id="ogr-selim-keskin"><summary>Selim Keskin <span class="alt">katılım 1/1</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>7-A Grubu · Pazar · Rincon evi · 12:00–17:00</td></tr>
 <tr><td>Sınıf</td><td>7. sınıf</td></tr>
 <tr><td>Katılım</td><td>1/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>yok</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Orhan Ark <span class="alt">katılım 1/1</span></summary>
+<details class="ogr" id="ogr-orhan-ark"><summary>Orhan Ark <span class="alt">katılım 1/1</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>7-A Grubu · Pazar · Rincon evi · 12:00–17:00</td></tr>
 <tr><td>Sınıf</td><td>7. sınıf</td></tr>
 <tr><td>Katılım</td><td>1/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>yok</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Hüseyin Nazarov <span class="alt">katılım 1/1</span></summary>
+<details class="ogr" id="ogr-huseyin-nazarov"><summary>Hüseyin Nazarov <span class="alt">katılım 1/1</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>7-A Grubu · Pazar · Rincon evi · 12:00–17:00</td></tr>
 <tr><td>Sınıf</td><td>7. sınıf</td></tr>
 <tr><td>Katılım</td><td>1/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>yok</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Murat Yıldız <span class="alt">katılım 1/1</span></summary>
+<details class="ogr" id="ogr-murat-yildiz"><summary>Murat Yıldız <span class="alt">katılım 1/1</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>7-A Grubu · Pazar · Rincon evi · 12:00–17:00</td></tr>
 <tr><td>Sınıf</td><td>7. sınıf</td></tr>
 <tr><td>Katılım</td><td>1/1</td></tr>
@@ -525,42 +530,42 @@ blockquote {
 </div>
 <div class="kart">
 <h3>7-B Grubu <span class="alt">7. sınıf · Hakan Kaplan · Pazar · Heron evi · 12:00–17:00</span></h3>
-<details class="ogr"><summary>Mehmet Uyarer <span class="alt">katılım 1/1</span></summary>
+<details class="ogr" id="ogr-mehmet-uyarer"><summary>Mehmet Uyarer <span class="alt">katılım 1/1</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>7-B Grubu · Pazar · Heron evi · 12:00–17:00</td></tr>
 <tr><td>Sınıf</td><td>7. sınıf</td></tr>
 <tr><td>Katılım</td><td>1/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>yok</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Lokman Keskin <span class="alt">katılım 1/1</span></summary>
+<details class="ogr" id="ogr-lokman-keskin"><summary>Lokman Keskin <span class="alt">katılım 1/1</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>7-B Grubu · Pazar · Heron evi · 12:00–17:00</td></tr>
 <tr><td>Sınıf</td><td>7. sınıf</td></tr>
 <tr><td>Katılım</td><td>1/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>yok</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Berat Sönmez <span class="alt">katılım 1/1</span></summary>
+<details class="ogr" id="ogr-berat-sonmez"><summary>Berat Sönmez <span class="alt">katılım 1/1</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>7-B Grubu · Pazar · Heron evi · 12:00–17:00</td></tr>
 <tr><td>Sınıf</td><td>7. sınıf</td></tr>
 <tr><td>Katılım</td><td>1/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>yok</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Fatih Sağır <span class="alt">katılım 0/1 · 1 devamsızlık</span></summary>
+<details class="ogr" id="ogr-fatih-sagir"><summary>Fatih Sağır <span class="alt">katılım 0/1 · 1 devamsızlık</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>7-B Grubu · Pazar · Heron evi · 12:00–17:00</td></tr>
 <tr><td>Sınıf</td><td>7. sınıf</td></tr>
 <tr><td>Katılım</td><td>0/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>1. Hafta</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Salahaddin Shamil <span class="alt">katılım 1/1</span></summary>
+<details class="ogr" id="ogr-salahaddin-shamil"><summary>Salahaddin Shamil <span class="alt">katılım 1/1</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>7-B Grubu · Pazar · Heron evi · 12:00–17:00</td></tr>
 <tr><td>Sınıf</td><td>7. sınıf</td></tr>
 <tr><td>Katılım</td><td>1/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>yok</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Salih Başar <span class="alt">katılım 1/1</span></summary>
+<details class="ogr" id="ogr-salih-basar"><summary>Salih Başar <span class="alt">katılım 1/1</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>7-B Grubu · Pazar · Heron evi · 12:00–17:00</td></tr>
 <tr><td>Sınıf</td><td>7. sınıf</td></tr>
 <tr><td>Katılım</td><td>1/1</td></tr>
@@ -570,7 +575,7 @@ blockquote {
 </div>
 <div class="kart">
 <h3>7-C Grubu <span class="alt">7. sınıf · Hayrettin Yıldırım · Pazar · Adeline evi · 12:00–17:00</span></h3>
-<details class="ogr"><summary>Yunus Özgen <span class="alt">katılım 1/1</span></summary>
+<details class="ogr" id="ogr-yunus-ozgen"><summary>Yunus Özgen <span class="alt">katılım 1/1</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>7-C Grubu · Pazar · Adeline evi · 12:00–17:00</td></tr>
 <tr><td>Sınıf</td><td>7. sınıf</td></tr>
 <tr><td>Okul</td><td>Peterson</td></tr>
@@ -578,35 +583,35 @@ blockquote {
 <tr><td>Gelmediği haftalar</td><td>yok</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Murad Peker <span class="alt">katılım 0/1 · 1 devamsızlık</span></summary>
+<details class="ogr" id="ogr-murad-peker"><summary>Murad Peker <span class="alt">katılım 0/1 · 1 devamsızlık</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>7-C Grubu · Pazar · Adeline evi · 12:00–17:00</td></tr>
 <tr><td>Sınıf</td><td>7. sınıf</td></tr>
 <tr><td>Katılım</td><td>0/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>1. Hafta</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>İbrahim Keçicioğlu <span class="alt">katılım 1/1</span></summary>
+<details class="ogr" id="ogr-ibrahim-kecicioglu"><summary>İbrahim Keçicioğlu <span class="alt">katılım 1/1</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>7-C Grubu · Pazar · Adeline evi · 12:00–17:00</td></tr>
 <tr><td>Sınıf</td><td>7. sınıf</td></tr>
 <tr><td>Katılım</td><td>1/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>yok</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Fatih Oruç <span class="alt">katılım 1/1</span></summary>
+<details class="ogr" id="ogr-fatih-oruc"><summary>Fatih Oruç <span class="alt">katılım 1/1</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>7-C Grubu · Pazar · Adeline evi · 12:00–17:00</td></tr>
 <tr><td>Sınıf</td><td>7. sınıf</td></tr>
 <tr><td>Katılım</td><td>1/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>yok</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Akif Göçeri <span class="alt">katılım 1/1</span></summary>
+<details class="ogr" id="ogr-akif-goceri"><summary>Akif Göçeri <span class="alt">katılım 1/1</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>7-C Grubu · Pazar · Adeline evi · 12:00–17:00</td></tr>
 <tr><td>Sınıf</td><td>7. sınıf</td></tr>
 <tr><td>Katılım</td><td>1/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>yok</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Halil Mercan <span class="alt">katılım 1/1</span></summary>
+<details class="ogr" id="ogr-halil-mercan"><summary>Halil Mercan <span class="alt">katılım 1/1</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>7-C Grubu · Pazar · Adeline evi · 12:00–17:00</td></tr>
 <tr><td>Sınıf</td><td>7. sınıf</td></tr>
 <tr><td>Katılım</td><td>1/1</td></tr>
@@ -616,28 +621,28 @@ blockquote {
 </div>
 <div class="kart">
 <h3>8-A Grubu <span class="alt">8. sınıf · Akif Türk · Cuma akşamı · Adeline evi · 17:00–22:00</span></h3>
-<details class="ogr"><summary>Sadık Kaparov <span class="alt">katılım 1/1</span></summary>
+<details class="ogr" id="ogr-sadik-kaparov"><summary>Sadık Kaparov <span class="alt">katılım 1/1</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>8-A Grubu · Cuma akşamı · Adeline evi · 17:00–22:00</td></tr>
 <tr><td>Sınıf</td><td>8. sınıf</td></tr>
 <tr><td>Katılım</td><td>1/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>yok</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Hasan Gürel <span class="alt">katılım 1/1</span></summary>
+<details class="ogr" id="ogr-hasan-gurel"><summary>Hasan Gürel <span class="alt">katılım 1/1</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>8-A Grubu · Cuma akşamı · Adeline evi · 17:00–22:00</td></tr>
 <tr><td>Sınıf</td><td>8. sınıf</td></tr>
 <tr><td>Katılım</td><td>1/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>yok</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Salih Türk <span class="alt">katılım 1/1</span></summary>
+<details class="ogr" id="ogr-salih-turk"><summary>Salih Türk <span class="alt">katılım 1/1</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>8-A Grubu · Cuma akşamı · Adeline evi · 17:00–22:00</td></tr>
 <tr><td>Sınıf</td><td>8. sınıf</td></tr>
 <tr><td>Katılım</td><td>1/1</td></tr>
 <tr><td>Gelmediği haftalar</td><td>yok</td></tr>
 </tbody></table></div>
 </details>
-<details class="ogr"><summary>Mustafa Keskin <span class="alt">katılım 0/1 · 1 devamsızlık</span></summary>
+<details class="ogr" id="ogr-mustafa-keskin"><summary>Mustafa Keskin <span class="alt">katılım 0/1 · 1 devamsızlık</span></summary>
 <div class="tablo-kap"><table class="ist bilgi"><tbody><tr><td>Grup</td><td>8-A Grubu · Cuma akşamı · Adeline evi · 17:00–22:00</td></tr>
 <tr><td>Sınıf</td><td>8. sınıf</td></tr>
 <tr><td>Katılım</td><td>0/1</td></tr>
@@ -697,6 +702,10 @@ blockquote {
 <tbody><tr><td>[[2026-27-h01]]</td><td>yaptı</td><td>—</td><td>—</td></tr></tbody></table></div>
 </div>
 </section>
+</div>
+
+<div class="tab" id="tab-aileler" hidden>
+
 </div>
 
 <div class="tab" id="tab-haftalar" hidden>
@@ -875,5 +884,16 @@ blockquote {
   btns.forEach(function (b) { b.addEventListener('click', function () { ac(b.dataset.tab); }); });
   var h = location.hash.replace('#', '');
   if (h && document.getElementById('tab-' + h)) ac(h);
+  // kişi bağlantıları: Öğrenciler sekmesine geç, kartı aç, oraya kaydır
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a.kisi') : null;
+    if (!a) return;
+    var hedef = document.querySelector(a.getAttribute('href'));
+    if (!hedef) return;
+    e.preventDefault();
+    ac('ogrenciler');
+    hedef.open = true;
+    hedef.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
 })();
 </script>
