@@ -266,7 +266,7 @@ blockquote {
 <span class="not"><span id="m-sayi">0</span> öğrenci</span>
 </div>
 <div class="tablo-kap"><table class="matris" id="matris">
-<thead><tr><th id="s-ad">İsim ⇅</th><th>Sınıf</th><th>Rehber</th><th>3 Eyl</th><th>4 Eyl</th><th>11 Eyl</th><th id="s-oran">Toplam ⇅</th></tr></thead>
+<thead><tr><th id="s-ad">İsim ⇅</th><th>Sınıf</th><th>Rehber</th><th>4–6 Eyl</th><th>11–13 Eyl</th><th id="s-oran">Toplam ⇅</th></tr></thead>
 <tbody><tr data-ad="erkan aslan" data-sinif="6" data-rehber="Emrullah" data-dev="0" data-oran="100"><td>Erkan Aslan</td><td>6</td><td>Emrullah</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
 <tr data-ad="ahmet musa" data-sinif="6" data-rehber="Emrullah" data-dev="0" data-oran="100"><td>Ahmet Musa</td><td>6</td><td>Emrullah</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
 <tr data-ad="taha i̇stek" data-sinif="6" data-rehber="Emrullah" data-dev="1" data-oran="0"><td>Taha İstek</td><td>6</td><td>Emrullah</td><td class="cna">–</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
@@ -302,7 +302,7 @@ blockquote {
 <tr data-ad="salih türk" data-sinif="8" data-rehber="Akif Türk" data-dev="0" data-oran="100"><td>Salih Türk</td><td>8</td><td>Akif Türk</td><td class="cna">–</td><td class="c1">1</td><td class="cna">–</td><td class="sum">1/1 (%100)</td></tr>
 <tr data-ad="mustafa keskin" data-sinif="8" data-rehber="Akif Türk" data-dev="1" data-oran="0"><td>Mustafa Keskin</td><td>8</td><td>Akif Türk</td><td class="cna">–</td><td class="c0">0</td><td class="cna">–</td><td class="sum">0/1 (%0)</td></tr>
 </tbody>
-<tfoot><tr><td colspan="3">Haftalık katılım</td><td></td><td></td><td></td><td></td></tr></tfoot>
+<tfoot><tr><td colspan="3">Haftalık katılım</td><td></td><td></td><td></td></tr></tfoot>
 </table></div>
 </section>
 <script>
@@ -311,7 +311,7 @@ blockquote {
   var rows = Array.prototype.slice.call(tbl.tBodies[0].rows);
   var fAd = document.getElementById('f-ad'), fSinif = document.getElementById('f-sinif'),
       fReh = document.getElementById('f-rehber'), fDev = document.getElementById('f-dev');
-  var haftaN = 3;
+  var haftaN = 2;
   function ozet() {
     var gorunen = rows.filter(function (r) { return !r.hidden; });
     document.getElementById('m-sayi').textContent = gorunen.length;
@@ -357,7 +357,7 @@ blockquote {
 <section>
 <h2>İstişare Katılımı</h2>
 <div class="tablo-kap"><table class="ist">
-<thead><tr><th>Mentor</th><th>3 Eyl</th><th>4 Eyl</th><th>11 Eyl</th><th>Toplam</th></tr></thead>
+<thead><tr><th>Mentor</th><th>0. Hafta</th><th>1. Hafta</th><th>2. Hafta</th><th>Toplam</th></tr></thead>
 <tbody><tr><td>Emrullah</td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td><td><span class="na">–</span></td><td class='sum'>2/2</td></tr>
 <tr><td>Hakan Kuzey</td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td><td><span class="na">–</span></td><td class='sum'>2/2</td></tr>
 <tr><td>Ertuğrul Tan</td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td><td><span class="na">–</span></td><td class='sum'>2/2</td></tr>
